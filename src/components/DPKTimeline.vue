@@ -1,15 +1,21 @@
 <template>
   <div v-if="ready" :id="tlID" class="dpk-timeline-component">
-    <span style="font-size:90px;" v-on:click="shiftTest">{{tlHeight}}</span>
+    <ul class="main-menu">
+      <li v-on:click="shiftTo({year: 1975, month: 0, day: 1}, {year: 2021, month: 0, day: 1})">
+        About
+      </li>
+      <li v-on:click="shiftTo({year: 1998, month: 0, day: 1}, {year: 2012, month: 0, day: 1})">
+        Experience
+      </li>
+      <li v-on:click="shiftTo({year: 1993, month: 0, day: 1}, {year: 2000, month: 0, day: 1})">
+        Education
+      </li>
+    </ul>
     <div class="timeline-line">
         
     </div>
-    <!-- <timepoint year="2006" month="1" day="1" :start="start" :end="end"></timepoint>
-    <timepoint year="1985" month="1" day="1" :start="start" :end="end"></timepoint>
-    <timepoint year="2000" month="1" day="1" :start="start" :end="end"></timepoint>
-    <timepoint year="2016" month="1" day="1" :start="start" :end="end"></timepoint> -->
     <marker-timepoint v-for="(marker, i) in events.markers" :key="'marker-' + i.toString()" :year="marker" :start="start" :end="end" :shift="shift"></marker-timepoint>
-    <work-timepoint v-for="(work, i) in events.experience" :key="'work-' + i.toString()" :year="work.start" :month="work.month" :start="start" :end="end" :details="work.details" :shift="shift"></work-timepoint>
+    <work-timepoint v-for="(work, i) in events.experience" :key="'work-' + i.toString()" :year="work.start" :month="work.month" :start="start" :end="end" :details="work.details" :shift="shift" v-on:point-selected="pointSelected"></work-timepoint>
   </div>
 </template>
 <script>
@@ -58,17 +64,32 @@ export default {
     },
     shiftTo: function (s, e) {
       let self = this
-      let ends = {start: self.$data.start.getFullYear(), end: self.$data.end.getFullYear()}
+      console.log(s)
+      console.log(e)
+      let ends = {start: self.$data.start.getFullYear(), end: self.$data.end.getFullYear(), sm: self.$data.start.getMonth(), sd: self.$data.start.getDate(), em: self.$data.end.getMonth(), ed: self.$data.end.getDate()}
       TweenLite.to(ends, 0.5, {
-        start: s,
-        end: e,
+        start: s.year,
+        end: e.year,
+        sm: s.month,
+        sd: s.day,
+        em: e.month,
+        ed: e.day,
         onUpdate: function (_ends, _self) {
+          console.log(_ends)
           _self.$data.start.setFullYear(_ends.start)
+          _self.$data.start.setMonth(_ends.sm)
+          _self.$data.start.setDate(_ends.sd)
           _self.$data.end.setFullYear(_ends.end)
+          _self.$data.end.setMonth(_ends.em)
+          _self.$data.end.setDate(_ends.ed)
           _self.$data.shift = Math.random()
         },
         onUpdateParams: [ends, self]
       })
+    },
+    pointSelected: function (e) {
+      let self = this
+      self.shiftTo({year: e.year - 2, month: e.month, day: 1}, {year: e.year + 1, month: e.month, day: 1})
     }
   },
   mounted: function () {
@@ -89,7 +110,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style>
 .dpk-timeline-component{
   position: absolute;
   width: 100vw;
@@ -98,13 +119,37 @@ export default {
   bottom: 0px;
   min-height: 700px;
   overflow: hidden;
-  .timeline-line{
-    position: absolute;
-    top:0;
-    left:50%;
-    width: 2px;
-    background-color: #999999;
-    height: 100%;
-  }
+}
+.dpk-timeline-component .timeline-line{
+  position: absolute;
+  top:0;
+  left:50%;
+  width: 2px;
+  background-color: #999999;
+  height: 100%;
+}
+ul.main-menu {
+  display:block;
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  width: 100vw;
+  height:40px;
+  padding:0;
+  margin:0;
+}
+
+ul.main-menu > li {
+  display:inline-block;
+  padding:0;
+  margin:0;
+  width:32%;
+  text-align:center;
+}
+
+ul.main-menu > li > label{
+  padding: 4px 6px;
+  
 }
 </style>
