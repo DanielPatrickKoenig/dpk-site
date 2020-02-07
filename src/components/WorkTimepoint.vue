@@ -1,8 +1,8 @@
 <template>
   <div :style="rendergStyle()">
     <ul :class="details.side == 'right' ? 'work-list right-list' : 'work-list left-list'">
-      <li class="company-list-item">{{details.company}}</li>
-      <li class="title-list-item">{{details.title}}</li>
+      <li class="company-list-item" v-on:click="onSelected">{{details.company}}</li>
+      <li class="title-list-item" v-on:click="onSelected">{{details.title}}</li>
     </ul>
     <slot></slot>
   </div>
@@ -18,7 +18,7 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
+<style>
 .work-list{
   position: absolute;
   width: 120px;
@@ -27,16 +27,17 @@ export default {
   left: 10px;
   margin:0;
   padding: 0;
-  > li{
-    display: block;
-    margin:0;
-    padding: 0;
-  }
+  
 }
 .left-list{
   margin-left: 20px;
 }
 .right-list{
   margin-left: -140px;
+}
+.work-list > li{
+  display: block;
+  margin:0;
+  padding: 0;
 }
 </style>

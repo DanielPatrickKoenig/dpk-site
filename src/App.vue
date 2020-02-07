@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <dpk-timeline></dpk-timeline>
+    <dpk-timeline :shift="0" :sy="startYear" :ey="endYear"></dpk-timeline>
   </div>
 </template>
 
@@ -13,32 +13,22 @@ export default {
   },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
     }
   }
 }
 </script>
 
-<style lang="scss">
+<style>
 body{
   padding: 0;
   margin:0;
+  font-family: Arial;
 }
 #app {
 }
 
 h1, h2 {
   font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
 }
 
 a {
