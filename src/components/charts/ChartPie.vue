@@ -1,5 +1,10 @@
 <template>
   <div class="pie-chart">
+    <ul class="pie-legend" :style="'opacity:' + scale + ';'">
+      <li v-for="(n, i) in legendColors" :key="'legend-item-' + i.toString()" :style="'box-shadow: 20px 0 0 ' + n.color + ' inset;'">
+        {{n.label}}
+      </li>
+    </ul>
     <svg class="work-charts" :id="chartid" :style="'width:' + size.width + 'px;height:' + size.height + 'px;'">
       <path class="allocation-pie" v-for="(map, i) in renderMap" :key="'path-' + i.toString()" :d="map.d" :fill="map.color"></path>
     </svg>
@@ -14,7 +19,8 @@
         chartObject: undefined,
         renderMap: [],
         size: {width: 200, height: 200},
-        processedData: []
+        processedData: [],
+        legendColors: []
       }
     },
     props: ['chartdata', 'colors', 'textcolor', 'title', 'hovertitle', 'scale'],
@@ -28,9 +34,11 @@
       processData: function () {
         let self = this
         self.$data.processData = []
+        self.$data.legendColors = []
         let count = 0
         let index = 0
         for (let x in self.chartdata) {
+          self.$data.legendColors.push({label: x, color: self.colors[index]})
           for (let i = 0; i < self.chartdata[x]; i++) {
             self.$data.processedData.push({label: x, value: count, index: index})
             count++
@@ -114,5 +122,16 @@ svg.work-charts{
     margin-top:-100px;
 }
 svg.work-charts > path.allocation-pie{
+}
+ul.pie-legend {
+    padding: 0;
+    margin:-37px 0 0 -138px;
+    width:120px;
+    position:absolute;
+}
+ul.pie-legend > li{
+    display:block;
+    margin: 2px 0 0 0;
+    padding: 2px 0 0 25px;
 }
 </style>
