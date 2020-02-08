@@ -1,6 +1,6 @@
 // import {TweenLite} from 'gsap'
 export default {
-  props: ['year', 'month', 'day', 'details', 'start', 'end', 'shift'],
+  props: ['year', 'month', 'day', 'details', 'start', 'end', 'sig', 'shift'],
   data () {
     return {
       date: null,
@@ -33,7 +33,7 @@ export default {
       // console.log(mils)
       self.$data.top = 1 - ((mils - self.start.getTime()) / (self.end.getTime() - self.start.getTime()))
       // console.log(1 - self.$data.top)
-    }, 
+    },
     rendergStyle: function () {
       let self = this
       return 'top:' + (self.$data.followTop * 100).toString() + '%;' + self.getExtraStyle()
@@ -64,9 +64,9 @@ export default {
     },
     onSelected: function () {
       let self = this
-      self.$emit('point-selected', {year: self.year, month: self.month, details: self.details})
+      self.$emit('point-selected', {year: self.year, month: self.month, details: self.details, sig: self.sig})
     }
-   },
+  },
   mounted: function () {
     let self = this
     self.redrawPoint()
