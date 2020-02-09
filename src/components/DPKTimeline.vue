@@ -18,9 +18,11 @@
     <work-timepoint v-for="(work, i) in events.experience" :key="'work-' + i.toString()" :year="work.start" :month="work.month" :start="start" :end="end" :details="work.details" :shift="shift" v-on:point-selected="workPointSelected" :sig="work.id">
       <div class="dpk-timeline-chart" v-if="work.stateVal > 0">
         <div class="work-chart-bg" :style="'opacity:' + work.stateVal.toString() + ';'">
-          <h3>{{work.details.company}}</h3>
+          <div>
+            <h3>{{work.details.title}}</h3>
+          </div>
         </div>
-        <chart-pie :chartdata="work.details.pie" :colors="colors" textcolor="#333333" title="Stats" hovertitle="" :scale="work.stateVal > .5 ? 1 : work.stateVal * 2"></chart-pie>
+        <chart-pie :chartdata="work.details.chart" :colors="colors" textcolor="#333333" title="Stats" hovertitle="" :scale="work.stateVal > .5 ? 1 : work.stateVal * 2"></chart-pie>
       </div>
     </work-timepoint>
   </div>
@@ -45,17 +47,17 @@ export default {
       events: {
         markers: [],
         experience: [
-          {id: Utilities.generateID(), stateVal: 0, start: 1999, end: 2001, month: 5, company: 'Lighten Coleman', title: 'Art Director', details: {side: 'right', company: 'Lighten Coleman', title: 'Art Director', pie: {js: 55, css: 25, python: 15, cshap: 5}}},
-          {id: Utilities.generateID(), stateVal: 0, start: 2001, end: 2002, month: 4, company: 'Asylum', title: 'Designer', details: {company: 'Asylum', title: 'Designer', pie: {js: 55, css: 25, python: 15, cshap: 5}}},
-          {id: Utilities.generateID(), stateVal: 0, start: 2002, end: 2003, month: 3, company: 'Asa', title: 'Designer', details: {side: 'right', company: 'ASA', title: 'Designer', pie: {js: 55, css: 25, python: 15, cshap: 5}}},
-          {id: Utilities.generateID(), stateVal: 0, start: 2003, end: 2004, month: 2, company: 'Brio', title: 'Art Director', details: {company: 'Brio', title: 'Art Director', pie: {js: 55, css: 25, python: 15, cshap: 5}}},
-          {id: Utilities.generateID(), stateVal: 0, start: 2004, end: 2005, month: 3, company: 'Ford', title: 'Flash Developer', details: {side: 'right', company: 'Ford', title: 'Flash Developer', pie: {js: 55, css: 25, python: 15, cshap: 5}}},
-          {id: Utilities.generateID(), stateVal: 0, start: 2005, end: 2006, month: 6, company: 'NCMS', title: 'Flash Developer', details: {company: 'NCMS', title: 'Flash Developer', pie: {js: 55, css: 25, python: 15, cshap: 5}}},
-          {id: Utilities.generateID(), stateVal: 0, start: 2006, end: 2007, month: 1, company: 'Duffy Petrosky', title: 'Sr. Art Director', details: {side: 'right', company: 'Duffy Petrosky', title: 'Sr. Art Director', pie: {js: 55, css: 25, python: 15, cshap: 5}}},
-          {id: Utilities.generateID(), stateVal: 0, start: 2007, end: 2009, month: 1, company: 'Organic', title: 'Sr. Engineer', details: {company: 'Organic', title: 'Sr. Engineer', pie: {js: 55, css: 25, python: 15, cshap: 5}}},
-          {id: Utilities.generateID(), stateVal: 0, start: 2009, end: 2010, month: 1, company: 'Enlighten', title: 'Software Engineer', details: {side: 'right', company: 'Enlighten', title: 'Software Engineer', pie: {js: 55, css: 25, python: 15, cshap: 5}}},
-          {id: Utilities.generateID(), stateVal: 0, start: 2010, end: 2010, month: 1, company: 'Concept Facgtory', title: 'Software Developer', details: {company: 'Concept Facgtory', title: 'Software Developer', pie: {js: 55, css: 25, python: 15, cshap: 5}}},
-          {id: Utilities.generateID(), stateVal: 0, start: 2010, end: -1, month: 4, company: 'Gongos', title: 'Sr. Developer', details: {side: 'right', company: 'Gongosn', title: 'Sr. Developer', pie: {js: 55, css: 25, python: 15, cshap: 5}}}
+          {id: Utilities.generateID(), stateVal: 0, start: 1999, end: 2001, month: 5, company: 'Lighten Coleman', title: 'Art Director', details: {side: 'right', company: 'Lighten Coleman', title: 'Art Director', chart: {bar: {vanillajs: 20, vue: 45, scss: 15, pandas: 14, dotnet: 6}, pie: {js: 55, css: 25, python: 15, cshap: 5}}}},
+          {id: Utilities.generateID(), stateVal: 0, start: 2001, end: 2002, month: 4, company: 'Asylum', title: 'Designer', details: {company: 'Asylum', title: 'Designer', chart: {bar: {vanillajs: 20, vue: 45, scss: 15, pandas: 14, dotnet: 6}, pie: {js: 55, css: 25, python: 15, cshap: 5}}}},
+          {id: Utilities.generateID(), stateVal: 0, start: 2002, end: 2003, month: 3, company: 'Asa', title: 'Designer', details: {side: 'right', company: 'ASA', title: 'Designer', chart: {bar: {vanillajs: 20, vue: 45, scss: 15, pandas: 14, dotnet: 6}, pie: {js: 55, css: 25, python: 15, cshap: 5}}}},
+          {id: Utilities.generateID(), stateVal: 0, start: 2003, end: 2004, month: 2, company: 'Brio', title: 'Art Director', details: {company: 'Brio', title: 'Art Director', chart: {bar: {vanillajs: 20, vue: 45, scss: 15, pandas: 14, dotnet: 6}, pie: {js: 55, css: 25, python: 15, cshap: 5}}}},
+          {id: Utilities.generateID(), stateVal: 0, start: 2004, end: 2005, month: 3, company: 'Ford', title: 'Flash Developer', details: {side: 'right', company: 'Ford', title: 'Flash Developer', chart: {bar: {vanillajs: 20, vue: 45, scss: 15, pandas: 14, dotnet: 6}, pie: {js: 55, css: 25, python: 15, cshap: 5}}}},
+          {id: Utilities.generateID(), stateVal: 0, start: 2005, end: 2006, month: 6, company: 'NCMS', title: 'Flash Developer', details: {company: 'NCMS', title: 'Flash Developer', chart: {bar: {vanillajs: 20, vue: 45, scss: 15, pandas: 14, dotnet: 6}, pie: {js: 55, css: 25, python: 15, cshap: 5}}}},
+          {id: Utilities.generateID(), stateVal: 0, start: 2006, end: 2007, month: 1, company: 'Duffy Petrosky', title: 'Sr. Art Director', details: {side: 'right', company: 'Duffy Petrosky', title: 'Sr. Art Director', chart: {bar: {vanillajs: 20, vue: 45, scss: 15, pandas: 14, dotnet: 6}, pie: {js: 55, css: 25, python: 15, cshap: 5}}}},
+          {id: Utilities.generateID(), stateVal: 0, start: 2007, end: 2009, month: 1, company: 'Organic', title: 'Sr. Engineer', details: {company: 'Organic', title: 'Sr. Engineer', chart: {bar: {vanillajs: 20, vue: 45, scss: 15, pandas: 14, dotnet: 6}, pie: {js: 55, css: 25, python: 15, cshap: 5}}}},
+          {id: Utilities.generateID(), stateVal: 0, start: 2009, end: 2010, month: 1, company: 'Enlighten', title: 'Software Engineer', details: {side: 'right', company: 'Enlighten', title: 'Software Engineer', chart: {bar: {vanillajs: 20, vue: 45, scss: 15, pandas: 14, dotnet: 6}, pie: {js: 55, css: 25, python: 15, cshap: 5}}}},
+          {id: Utilities.generateID(), stateVal: 0, start: 2010, end: 2010, month: 1, company: 'Concept Facgtory', title: 'Software Developer', details: {company: 'Concept Facgtory', title: 'Software Developer', chart: {bar: {vanillajs: 20, vue: 45, scss: 15, pandas: 14, dotnet: 6}, pie: {js: 55, css: 25, python: 15, cshap: 5}}}},
+          {id: Utilities.generateID(), stateVal: 0, start: 2010, end: -1, month: 4, company: 'Gongos', title: 'Sr. Developer', details: {side: 'right', company: 'Gongosn', title: 'Sr. Developer', chart: {bar: {vanillajs: 20, vue: 45, scss: 15, pandas: 14, dotnet: 6}, pie: {js: 55, css: 25, python: 15, cshap: 5}}}}
         ],
         education: [],
         about: []
@@ -107,7 +109,7 @@ export default {
     workPointSelected: function (e) {
       let self = this
       self.activatePoint('experience', e.sig)
-      self.shiftTo({year: e.year - 2, month: e.month, day: 1}, {year: e.year + 1, month: e.month, day: 1})
+      self.shiftTo({year: e.year - 3, month: e.month, day: 1}, {year: e.year + 1, month: e.month, day: 1})
     },
     activatePoint: function (type, sig) {
       let self = this
@@ -191,8 +193,24 @@ ul.main-menu > li > label{
   left: 0;
   top: 0;
   margin-left: -150px;
-  margin-top: -100px;
-  background-color: rgba(255,255,255,.7);
+  margin-top: -50px;
+  background-color: rgba(255,255,255,.9);
   box-shadow: 0 0 0 1px #000000 inset;  
+}
+.work-chart-bg > div{
+  width: 106px;
+  margin: 7px auto;
+  height: 106px;
+}
+.work-chart-bg > div > h3{
+    width: 106px;
+    text-align: center;
+    height: 106px;
+    background-color: #999999;
+    border-radius: 200px;
+    font-size: 16px;
+    color: #ffffff;
+    display: table-cell;
+    vertical-align: middle;
 }
 </style>
