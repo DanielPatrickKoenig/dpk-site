@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <dpk-timeline :shift="0" :sy="startYear" :ey="endYear"></dpk-timeline>
+    <dpk-timeline></dpk-timeline>
   </div>
 </template>
 
@@ -34,4 +34,15 @@ h1, h2 {
 a {
   color: #42b983;
 }
+.pie-chart{
+  margin-left: -150px;
+  margin-top: -69px;
+} 
+.pie-chart,
+.pie-chart > div,
+.pie-chart > div > div,
+.pie-chart > div > div > canvas{
+  width: 320px !important;
+  height: 160px !important;
+} 
 </style>
