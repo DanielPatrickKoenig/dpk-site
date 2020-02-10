@@ -119,7 +119,7 @@ const WorkEvents = [
     company: 'Gongos',
     title: 'Sr. Developer',
     details: {side: 'right', company: 'Gongos', title: 'Sr. Developer', chart: {'JavaScript': 55, 'CSS': 25, 'Python': 15, 'C#': 3, 'PHP': 2}},
-    accomplishments: ['Accomplishment 1', 'Accomplishment 2', 'Accomplishment 3', 'Accomplishment 4', 'Accomplishment 5']
+    accomplishments: ['Accomplishment 1', 'Accomplishment 2', 'Accomplishment 3', 'Accomplishment 4', 'Accomplishment 5', 'Accomplishment 5']
   }
 ]
 export default WorkEvents
