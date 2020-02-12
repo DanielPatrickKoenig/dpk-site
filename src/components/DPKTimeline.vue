@@ -23,8 +23,7 @@
             <p>{{work.details.title}}</p>
             <p>{{work.start.toString()}} - {{work.end > 0 ? work.end.toString() : 'Present'}}</p>
             <ul>
-              <li v-for="(a, i) in work.accomplishments" :key="'accomplishment-' + i.toString()">
-                {{a}}
+              <li v-for="(a, i) in work.accomplishments" :key="'accomplishment-' + i.toString()" v-html="a">
               </li>
             </ul>
           </div>
