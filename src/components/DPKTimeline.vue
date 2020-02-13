@@ -1,13 +1,13 @@
 <template>
   <div v-if="ready" :id="tlID" class="dpk-timeline-component">
     <ul class="main-menu">
-      <li v-on:click="sectionSelected({year: 1975, month: 0, day: 1}, {year: 2021, month: 0, day: 1})">
+      <li v-on:click="sectionSelected({year: 1975, month: 0, day: 1}, {year: 2021, month: 0, day: 1}, 'about')">
         About
       </li>
-      <li v-on:click="sectionSelected({year: 1998, month: 0, day: 1}, {year: 2012, month: 0, day: 1})">
+      <li v-on:click="sectionSelected({year: 1998, month: 0, day: 1}, {year: 2012, month: 0, day: 1}, 'experience')">
         Experience
       </li>
-      <li v-on:click="sectionSelected({year: 1993, month: 0, day: 1}, {year: 2000, month: 0, day: 1})">
+      <li v-on:click="sectionSelected({year: 1993, month: 0, day: 1}, {year: 2000, month: 0, day: 1}, 'education')">
         Education
       </li>
     </ul>
@@ -15,7 +15,7 @@
         
     </div>
     <marker-timepoint v-for="(marker, i) in events.markers" :key="'marker-' + i.toString()" :year="marker" :start="start" :end="end" :shift="shift"></marker-timepoint>
-    <work-timepoint v-for="(work, i) in events.experience" :key="'work-' + i.toString()" :year="work.start" :month="work.month" :start="start" :end="end" :details="work.details" :shift="shift" v-on:point-selected="workPointSelected" :sig="work.id">
+    <work-timepoint v-for="(work, i) in events.experience" :key="'work-' + i.toString()" :year="work.start" :month="work.month" :start="start" :end="end" :details="work.details" :shift="shift" v-on:point-selected="workPointSelected" :sig="work.id" :opacity="visProps.experience">
       <div class="dpk-timeline-chart" v-if="work.stateVal > 0">
         <div class="work-chart-bg" :style="'opacity:' + work.stateVal.toString() + ';'">
           <div>
@@ -31,21 +31,26 @@
         <chart-pie :style="'opacity:' + work.stateVal.toString() + ';'" :chartdata="work.details.chart" :colors="colors" textcolor="#333333" title="" hovertitle="" :scale="work.stateVal > .5 ? 1 : work.stateVal * 2"></chart-pie>
       </div>
     </work-timepoint>
+    <education-timepoint v-for="(edu, i) in events.education" :key="'edu-' + i.toString()" :year="edu.start" :month="edu.month" :start="start" :end="end" :details="edu.details" :shift="shift" v-on:point-selected="eduPointSelected" :sig="edu.id" :opacity="visProps.education">
+    </education-timepoint>
   </div>
 </template>
 <script>
 import Timepoint from './Timepoint.vue'
 import MarkerTimepoint from './MarkerTimepoint.vue'
 import WorkTimepoint from './WorkTimepoint.vue'
+import EducationTimepoint from './EducationTimepoint.vue'
 import {TweenLite} from 'gsap'
 import ChartPie from './charts/ChartPie.vue'
 import Utilities from '../utils/Utilities.js'
 import WorkEvents from '../utils/WorkEvents.js'
+import EducationEvents from '../utils/EducationEvents.js'
 export default {
   components: {
     'timepoint': Timepoint,
     'marker-timepoint': MarkerTimepoint,
     'work-timepoint': WorkTimepoint,
+    'education-timepoint': EducationTimepoint,
     'chart-pie': ChartPie
   },
   data () {
@@ -54,7 +59,7 @@ export default {
       events: {
         markers: [],
         experience: WorkEvents,
-        education: [],
+        education: EducationEvents,
         about: []
       },
       tlHeight: 0,
@@ -62,7 +67,12 @@ export default {
       end: new Date(),
       ready: false,
       shift: 0,
-      colors: Utilities.ChartColors
+      colors: Utilities.ChartColors,
+      visProps: {
+        experience: 0,
+        education: 0,
+        about: 0
+      }
     }
   },
   methods: {
@@ -95,16 +105,19 @@ export default {
         onUpdateParams: [ends, self]
       })
     },
-    sectionSelected: function (s, e) {
+    sectionSelected: function (s, e, type) {
       this.shiftTo(s, e)
       this.activatePoint('experience')
       this.activatePoint('education')
       this.activatePoint('about')
+      this.showPoints(type)
     },
     workPointSelected: function (e) {
       let self = this
       self.activatePoint('experience', e.sig)
       self.shiftTo({year: e.year - 2, month: e.month, day: 1}, {year: e.year + 1, month: e.month, day: 1})
+    },
+    eduPointSelected: function (e) {
     },
     activatePoint: function (type, sig) {
       let self = this
@@ -113,6 +126,32 @@ export default {
           TweenLite.to(self.$data.events[type][i], 1, {stateVal: 1})
         } else {
           TweenLite.to(self.$data.events[type][i], 1, {stateVal: 0})
+        }
+      }
+    },
+    showPoints: function (type) {
+      let self = this
+      switch (type) {
+        case 'experience':
+        {
+          TweenLite.to(self.$data.visProps, 0.5, {experience: 1})
+          TweenLite.to(self.$data.visProps, 0.5, {education: 0})
+          TweenLite.to(self.$data.visProps, 0.5, {about: 0})
+          break
+        }
+        case 'education':
+        {
+          TweenLite.to(self.$data.visProps, 0.5, {experience: 0})
+          TweenLite.to(self.$data.visProps, 0.5, {education: 1})
+          TweenLite.to(self.$data.visProps, 0.5, {about: 0})
+          break
+        }
+        case 'about':
+        {
+          TweenLite.to(self.$data.visProps, 0.5, {experience: 0})
+          TweenLite.to(self.$data.visProps, 0.5, {education: 0})
+          TweenLite.to(self.$data.visProps, 0.5, {about: 1})
+          break
         }
       }
     }

@@ -1,6 +1,6 @@
 // import {TweenLite} from 'gsap'
 export default {
-  props: ['year', 'month', 'day', 'details', 'start', 'end', 'sig', 'shift'],
+  props: ['year', 'month', 'day', 'details', 'start', 'end', 'sig', 'shift', 'opacity'],
   data () {
     return {
       date: null,

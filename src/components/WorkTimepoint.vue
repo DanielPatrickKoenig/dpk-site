@@ -1,6 +1,6 @@
 <template>
   <div :style="rendergStyle()">
-    <ul :class="details.side == 'right' ? 'work-list right-list' : 'work-list left-list'">
+    <ul v-if="opacity > 0" :style="'opacity:' + opacity + ';'" :class="details.side == 'right' ? 'work-list right-list' : 'work-list left-list'">
       <li class="company-list-item" v-on:click="onSelected">{{details.company}}</li>
       <li class="title-list-item" v-on:click="onSelected">{{details.title}}</li>
     </ul>
@@ -13,7 +13,7 @@ export default {
   extends: BaseTimepoint,
   methods: {
     getExtraStyle: function () {
-      return 'left:50%;width:20px;height:20px;border-radius:20px;position:absolute;background-color:#00ff00;margin-left:-10px;margin-top:-10px;'
+      return 'left:50%;width:10px;height:10px;border-radius:20px;position:absolute;background-color:#ff0000;margin-left:-5px;margin-top:-5px;'
     }
   }
 }
