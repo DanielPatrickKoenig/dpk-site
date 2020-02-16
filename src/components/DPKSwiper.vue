@@ -44,7 +44,6 @@ export default {
         self.$emit('swipe', {direction: dir})
         console.log(dir)
       }
-      console.log(self.$data.positions)
       self.$data.positions = []
       self.$data.swiping = false
       console.log('end')
