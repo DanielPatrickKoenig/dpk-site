@@ -24,7 +24,7 @@
             <h2>{{work.details.company}}</h2>
             <p>{{work.details.title}}</p>
             <p>{{work.start.toString()}} - {{work.end > 0 ? work.end.toString() : 'Present'}}</p>
-            <dpk-carousel :items="work.details.charts">
+            <dpk-carousel :items="work.details.charts" :contentwidth="120" :autoplay="true">
               <div v-for="(chart, i) in work.details.charts" :key="'chart-' + i.toString()" :slot="'item-' + i.toString()">
                 <h3>
                   {{chart.title}}
@@ -255,7 +255,8 @@ ul.main-menu {
   box-shadow: 0 0 0 1px #000000 inset;  
   max-height: 75vh;
   min-height: 400px;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   > div{
     width: 286px;
     margin: 0 auto;
@@ -323,5 +324,28 @@ div.right-portion{
 }
 .right-connector{
   margin-left: -11px;
+}
+div.dpk-carousel{
+  height: 251px;
+  overflow: visible !important;
+  > ul{
+    > li{
+      margin:0 38px 0 0 !important;
+    }
+  }
+  > a {
+    top: 210px !important;
+    font-size: 20px;
+    width: 40px;
+    height: 32px;
+    display: inline-block;
+    text-align: center;
+    border-radius: 40px;
+    box-shadow: 0 0 0 1px #999999 inset;
+    padding-top: 8px;
+  }
+  > div.dpk-carousel-marker-container{
+    bottom: 13px !important;
+  }
 }
 </style>
