@@ -39,7 +39,7 @@ export default {
       return 'top:' + (self.$data.followTop * 100).toString() + '%;' + self.getExtraStyle()
     },
     getExtraStyle: function () {
-      return 'left:50%;width:20px;height:20px;position:absolute;background-color:#cc0000;margin-left:-10px;margin-top:-10px;'
+      return 'left:50%;width:20px;height:20px;border-radius:20px;position:absolute;background-color:#transparent;margin-left:-10px;margin-top:-10px;'
     },
     redrawPoint: function () {
       let self = this
