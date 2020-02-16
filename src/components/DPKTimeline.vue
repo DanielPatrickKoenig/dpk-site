@@ -249,10 +249,11 @@ ul.main-menu {
   left: 0;
   top: 0;
   margin-left: -150px;
-  margin-top: -152px;
+  margin-top: -210px;
   background-color: rgba(255,255,255,.9);
   box-shadow: 0 0 0 1px #000000 inset;  
   max-height: 75vh;
+  min-height: 400px;
   overflow: auto;
   > div{
     width: 286px;
