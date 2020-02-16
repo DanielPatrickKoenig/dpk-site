@@ -34,14 +34,14 @@ h1, h2 {
 a {
   color: #42b983;
 }
-.pie-chart{
-  margin-left: -150px;
-  margin-top: -69px;
+.echarts-chart{
+  margin-left: -15px;
+  margin-top: 10px;
 } 
-.pie-chart,
-.pie-chart > div,
-.pie-chart > div > div,
-.pie-chart > div > div > canvas{
+.echarts-chart,
+.echarts-chart > div,
+.echarts-chart > div > div,
+.echarts-chart > div > div > canvas{
   width: 320px !important;
   height: 160px !important;
 } 

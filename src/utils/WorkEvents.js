@@ -6,9 +6,31 @@ const WorkEvents = [
     start: 1999,
     end: 2001,
     month: 5,
-    company: 'Lighten Coleman',
-    title: 'Art Director',
-    details: {side: 'right', company: 'Lighten Coleman', title: 'Art Director', chart: {js: 55, css: 25, python: 15, cshap: 5}},
+    details: {
+      side: 'right',
+      company: 'Lighten Coleman',
+      title: 'Art Director',
+      charts: [
+        {
+          type: Utilities.ChartTypes.PIE,
+          context: Utilities.ChartContexts.SKILLS,
+          title: 'Most Used Skils',
+          data: {
+            'Design': 100
+          }
+        },
+        {
+          type: Utilities.ChartTypes.WORDCLOUD,
+          context: Utilities.ChartContexts.FRAMEWORKS_LIBRARIES,
+          title: 'Frameworks and Libraries',
+          data: {
+            'Illustrator': 10,
+            'QuarkXpress': 60,
+            'Photoshop': 30
+          }
+        }
+      ]
+    },
     accomplishments: [
       'Provided design expertise in the production of print advertisements and Brochures for brands such as Bang & Olvson, Oce, Habitat and many more.'
     ]
@@ -19,9 +41,32 @@ const WorkEvents = [
     start: 2001,
     end: 2002,
     month: 4,
-    company: 'Asylum',
-    title: 'Designer',
-    details: {company: 'Asylum', title: 'Designer', chart: {js: 55, css: 25, python: 15, cshap: 5}},
+    details: {
+      company: 'Asylum',
+      title: 'Designer',
+      charts: [
+        {
+          type: Utilities.ChartTypes.PIE,
+          context: Utilities.ChartContexts.SKILLS,
+          title: 'Most Used Skils',
+          data: {
+            'Design': 90,
+            'AS1': 10
+          }
+        },
+        {
+          type: Utilities.ChartTypes.WORDCLOUD,
+          context: Utilities.ChartContexts.FRAMEWORKS_LIBRARIES,
+          title: 'Frameworks and Libraries',
+          data: {
+            'Flash': 10,
+            'Illustrator': 20,
+            'QuarkXpress': 50,
+            'Photoshop': 20
+          }
+        }
+      ]
+    },
     accomplishments: [
       'Created th company&#39;s first interactive, cd rom based, annual report.',
       'Provided design expertise in the creation of annual reports and consumer product packaging for brands such as Abbod Labs, Goody, Avery Dennison and many more.'
@@ -33,9 +78,36 @@ const WorkEvents = [
     start: 2002,
     end: 2003,
     month: 3,
-    company: 'Asa',
-    title: 'Designer',
-    details: {side: 'right', company: 'ASA', title: 'Designer', chart: {js: 55, css: 25, python: 15, cshap: 5}},
+    details: {
+      side: 'right',
+      company: 'ASA',
+      title: 'Designer',
+      charts: [
+        {
+          type: Utilities.ChartTypes.PIE,
+          context: Utilities.ChartContexts.SKILLS,
+          title: 'Most Used Skils',
+          data: {
+            '3D Modeling': 15,
+            'Design': 70,
+            'AS1': 10,
+            'CSS': 5
+          }
+        },
+        {
+          type: Utilities.ChartTypes.WORDCLOUD,
+          context: Utilities.ChartContexts.FRAMEWORKS_LIBRARIES,
+          title: 'Frameworks and Libraries',
+          data: {
+            'Flash': 10,
+            'Illustrator': 20,
+            'QuarkXpress': 20,
+            'Photoshop': 30,
+            'Blender': 20
+          }
+        }
+      ]
+    },
     accomplishments: [
       'Enhanced capabilities to include interactive deliverables.',
       'Worked with model maker to generate digital representations of in store displays for brands such as Absolute Vodka, Mars, Firestone and many more.',
@@ -49,9 +121,33 @@ const WorkEvents = [
     start: 2003,
     end: 2004,
     month: 2,
-    company: 'Brio',
-    title: 'Art Director',
-    details: {company: 'Brio', title: 'Art Director', chart: {js: 55, css: 25, python: 15, cshap: 5}},
+    details: {
+      company: 'Brio',
+      title: 'Art Director',
+      charts: [
+        {
+          type: Utilities.ChartTypes.PIE,
+          context: Utilities.ChartContexts.SKILLS,
+          title: 'Most Used Skils',
+          data: {
+            'AS1': 10,
+            'Design': 90
+          }
+        },
+        {
+          type: Utilities.ChartTypes.WORDCLOUD,
+          context: Utilities.ChartContexts.FRAMEWORKS_LIBRARIES,
+          title: 'Frameworks and Libraries',
+          data: {
+            'Flash': 10,
+            'Illustrator': 20,
+            'InDesign': 20,
+            'Photoshop': 30,
+            'QuarkExpress': 20
+          }
+        }
+      ]
+    },
     accomplishments: [
       'Provided design expertise for the creation of B2B advertisements',
       'Enhanced capabilities to include interactive deliverables.'
@@ -61,9 +157,35 @@ const WorkEvents = [
     id: Utilities.generateID(),
     stateVal: 0,
     start: 2004,
-    company: 'Ford',
-    title: 'Flash Developer',
-    details: {side: 'right', company: 'Ford', title: 'Flash Developer', chart: {js: 55, css: 25, python: 15, cshap: 5}},
+    end: 2006,
+    month: 4,
+    details: {
+      side: 'right',
+      company: 'Ford',
+      title: 'Flash Developer',
+      charts: [
+        {
+          type: Utilities.ChartTypes.PIE,
+          context: Utilities.ChartContexts.SKILLS,
+          title: 'Most Used Skils',
+          data: {
+            'AS2': 60,
+            'AS1': 30,
+            'Design': 10
+          }
+        },
+        {
+          type: Utilities.ChartTypes.WORDCLOUD,
+          context: Utilities.ChartContexts.FRAMEWORKS_LIBRARIES,
+          title: 'Frameworks and Libraries',
+          data: {
+            'Flash': 40,
+            'Illustrator': 12,
+            'Photoshop': 12
+          }
+        }
+      ]
+    },
     accomplishments: [
       'Worked with the technical writers, scientists and safety specialists to develop material for training corses.',
       'Developed safety cources for ratiation, error proofing, electrical safety and many more.',
@@ -76,9 +198,32 @@ const WorkEvents = [
     start: 2005,
     end: 2006,
     month: 6,
-    company: 'NCMS',
-    title: 'Flash Developer',
-    details: {company: 'NCMS', title: 'Flash Developer', chart: {js: 55, css: 25, python: 15, cshap: 5}},
+    details: {
+      company: 'NCMS',
+      title: 'Flash Developer',
+      charts: [
+        {
+          type: Utilities.ChartTypes.PIE,
+          context: Utilities.ChartContexts.SKILLS,
+          title: 'Most Used Skils',
+          data: {
+            'AS2': 15,
+            'AS1': 45,
+            'Design': 40
+          }
+        },
+        {
+          type: Utilities.ChartTypes.WORDCLOUD,
+          context: Utilities.ChartContexts.FRAMEWORKS_LIBRARIES,
+          title: 'Frameworks and Libraries',
+          data: {
+            'Flash': 40,
+            'Illustrator': 12,
+            'Photoshop': 12
+          }
+        }
+      ]
+    },
     accomplishments: [
       'Developed a code library for streamlining the production of e-learning courses.',
       'Salvaged several, assumed to be, failed projects making them profitalbe and successful.',
@@ -91,9 +236,35 @@ const WorkEvents = [
     start: 2006,
     end: 2007,
     month: 1,
-    company: 'Duffy Petrosky',
-    title: 'Sr. Art Director',
-    details: {side: 'right', company: 'Duffy Petrosky', title: 'Sr. Art Director', chart: {js: 55, css: 25, python: 15, cshap: 5}},
+    details: {
+      side: 'right',
+      company: 'Duffy Petrosky',
+      title: 'Sr. Art Director',
+      charts: [
+        {
+          type: Utilities.ChartTypes.PIE,
+          context: Utilities.ChartContexts.SKILLS,
+          title: 'Most Used Skils',
+          data: {
+            'AS2': 20,
+            'AS1': 30,
+            'Design': 50
+          }
+        },
+        {
+          type: Utilities.ChartTypes.WORDCLOUD,
+          context: Utilities.ChartContexts.FRAMEWORKS_LIBRARIES,
+          title: 'Frameworks and Libraries',
+          data: {
+            'Flash': 40,
+            'Illustrator': 12,
+            'InDesign': 12,
+            'Photoshop': 12,
+            'PageMaker': 6
+          }
+        }
+      ]
+    },
     accomplishments: [
       'Managed the design and development of all web based projects.',
       'Played a lead role in the design, concept and production of print material',
@@ -106,9 +277,31 @@ const WorkEvents = [
     start: 2007,
     end: 2009,
     month: 1,
-    company: 'Organic',
-    title: 'Sr. Engineer',
-    details: {company: 'Organic', title: 'Sr. Engineer', chart: {js: 55, css: 25, python: 15, cshap: 5}},
+    details: {
+      company: 'Organic',
+      title: 'Sr. Engineer',
+      charts: [
+        {
+          type: Utilities.ChartTypes.PIE,
+          context: Utilities.ChartContexts.SKILLS,
+          title: 'Most Used Skils',
+          data: {
+            'AS2': 85,
+            'JS': 15
+          }
+        },
+        {
+          type: Utilities.ChartTypes.WORDCLOUD,
+          context: Utilities.ChartContexts.FRAMEWORKS_LIBRARIES,
+          title: 'Frameworks and Libraries',
+          data: {
+            'Flash': 40,
+            'MooTools': 30,
+            'gsap': 25
+          }
+        }
+      ]
+    },
     accomplishments: [
       'Significantly improved the realationship between the creative and engineering department.',
       'Developmed multiple tools to streamline the production of unorthadox development solutiohns.',
@@ -122,9 +315,37 @@ const WorkEvents = [
     start: 2009,
     end: 2010,
     month: 1,
-    company: 'Enlighten',
-    title: 'Software Engineer',
-    details: {side: 'right', company: 'Enlighten', title: 'Software Engineer', chart: {'AS3': 58, 'AS2': 20, 'CSS': 12, 'JavaScript': 10}},
+    details: {
+      side: 'right',
+      company: 'Enlighten',
+      title: 'Software Engineer',
+      charts: [
+        {
+          type: Utilities.ChartTypes.PIE,
+          context: Utilities.ChartContexts.SKILLS,
+          title: 'Most Used Skils',
+          data: {
+            'AS3': 58,
+            'AS2': 20,
+            'JS': 10,
+            'CSS': 12
+          }
+        },
+        {
+          type: Utilities.ChartTypes.WORDCLOUD,
+          context: Utilities.ChartContexts.FRAMEWORKS_LIBRARIES,
+          title: 'Frameworks and Libraries',
+          data: {
+            'Flash': 40,
+            'gsap': 30,
+            'Papervision': 25,
+            'FlashDevelop': 100,
+            'Flex': 18,
+            'svn': 18
+          }
+        }
+      ]
+    },
     accomplishments: [
       'Created a tool for 3D particle modeling for creating particle based user experieces elements.',
       'Mentored other engineers in the development of AS3 applications.',
@@ -139,9 +360,47 @@ const WorkEvents = [
     start: 2010,
     end: 2010,
     month: 1,
-    company: 'Concept Facgtory',
-    title: 'Software Developer',
-    details: {company: 'Concept Facgtory', title: 'Software Developer', chart: {'AS3': 85, 'Objective C': 10, 'Java': 5}},
+    details: {
+      company: 'Concept Facgtory',
+      title: 'Software Developer',
+      charts: [
+        {
+          type: Utilities.ChartTypes.PIE,
+          context: Utilities.ChartContexts.SKILLS,
+          title: 'Most Used Skils',
+          data: {
+            'AS3': 55,
+            'Objective C': 25,
+            'JS': 15,
+            'CSS': 24
+          }
+        },
+        {
+          type: Utilities.ChartTypes.BAR,
+          context: Utilities.ChartContexts.WORK_TYPE,
+          title: 'Types of Coding',
+          data: {
+            'Front-end': 80,
+            'Mobile': 20
+          }
+        },
+        {
+          type: Utilities.ChartTypes.WORDCLOUD,
+          context: Utilities.ChartContexts.FRAMEWORKS_LIBRARIES,
+          title: 'Frameworks and Libraries',
+          data: {
+            'XCode': 12,
+            'Flash': 100,
+            'gsap': 30,
+            'jquery': 8,
+            'FlashDevelop': 22,
+            'Flex': 18,
+            'Illustrator': 30,
+            'Photoshop': 26
+          }
+        }
+      ]
+    },
     accomplishments: [
       'Established a rapid prototyping workflow that streamlined proposal and production efficiency by more than 50 percent.',
       'Developed a touch sceen interactive promotional tool for the company&#39;s booth at the 2010 Consemer Electronic Show.',
@@ -155,9 +414,64 @@ const WorkEvents = [
     start: 2010,
     end: -1,
     month: 4,
-    company: 'Gongos',
-    title: 'Sr. Developer',
-    details: {side: 'right', company: 'Gongos', title: 'Sr. Developer', chart: {'JavaScript': 55, 'CSS': 25, 'Python': 15, 'C#': 3, 'PHP': 2}},
+    details: {
+      side: 'right',
+      company: 'Gongos',
+      title: 'Sr. Developer',
+      charts: [
+        {
+          type: Utilities.ChartTypes.PIE,
+          context: Utilities.ChartContexts.SKILLS,
+          title: 'Most Used Skils',
+          data: {
+            'JS': 55,
+            'CSS': 25,
+            'Python': 15,
+            'C#': 3,
+            'PHP': 2
+          }
+        },
+        {
+          type: Utilities.ChartTypes.BAR,
+          context: Utilities.ChartContexts.WORK_TYPE,
+          title: 'Types of Coding',
+          data: {
+            'Front-end': 82,
+            'Server-side': 8,
+            'Mobile': 10
+          }
+        },
+        {
+          type: Utilities.ChartTypes.WORDCLOUD,
+          context: Utilities.ChartContexts.FRAMEWORKS_LIBRARIES,
+          title: 'Frameworks and Libraries',
+          data: {
+            'Vue': 100,
+            'Vanilla js': 35,
+            'jQuery': 25,
+            'Vuetify': 45,
+            'Pixi': 12,
+            'three': 14,
+            'gsap': 30,
+            'git': 55,
+            'npm': 65,
+            'pip': 40,
+            'pandas': 20,
+            'numpy': 20,
+            'angular': 5,
+            'web2py': 30,
+            'flask': 5,
+            '.Net': 6,
+            'Xamarin': 10,
+            'webpack': 16,
+            'electron': 20,
+            'scss': 30,
+            'stylus': 16,
+            'bootstrap': 22
+          }
+        }
+      ]
+    },
     accomplishments: [
       'Created mobile, web and desktop applications using a wide veriety of technologies including Python, Vue js, Angular, electron, Three js, Pixi js, Unity, Objective C, Vuforia, Xamirine',
       'Developed a wide range of tools for creative department, allowing for time saving efficiencies and increasing colaborition with developers.',

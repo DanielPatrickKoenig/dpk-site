@@ -1,5 +1,7 @@
 <template>
   <div v-if="ready" :id="tlID" class="dpk-timeline-component">
+    <div class="left-portion"></div>
+    <div class="right-portion"></div>
     <ul class="main-menu">
       <li v-on:click="sectionSelected({year: 1975, month: 0, day: 1}, {year: 2021, month: 0, day: 1}, 'about')">
         About
@@ -19,16 +21,26 @@
       <div class="dpk-timeline-chart" v-if="work.stateVal > 0">
         <div class="work-chart-bg" :style="'opacity:' + work.stateVal.toString() + ';'">
           <div>
-            <h3>{{work.details.company}}</h3>
+            <h2>{{work.details.company}}</h2>
             <p>{{work.details.title}}</p>
             <p>{{work.start.toString()}} - {{work.end > 0 ? work.end.toString() : 'Present'}}</p>
-            <ul>
+            <dpk-carousel :items="work.details.charts">
+              <div v-for="(chart, i) in work.details.charts" :key="'chart-' + i.toString()" :slot="'item-' + i.toString()">
+                <h3>
+                  {{chart.title}}
+                </h3>
+                <chart-pie v-if="chart.type === chartTypes.PIE" :style="'opacity:' + work.stateVal.toString() + ';'" :chartdata="chart.data" :colors="colors" textcolor="#333333" title="" hovertitle="" :scale="work.stateVal > .5 ? 1 : work.stateVal * 2"></chart-pie>
+                <chart-bar v-if="chart.type === chartTypes.BAR" :style="'opacity:' + work.stateVal.toString() + ';'" :chartdata="chart.data" :colors="colors" textcolor="#333333" title="" hovertitle="" :scale="work.stateVal > .5 ? 1 : work.stateVal * 2"></chart-bar>
+                <chart-wordcloud v-if="chart.type === chartTypes.WORDCLOUD" :style="'opacity:' + work.stateVal.toString() + ';'" :chartdata="chart.data" :colors="colors" textcolor="#333333" title="" hovertitle="" :scale="work.stateVal > .5 ? 1 : work.stateVal * 2"></chart-wordcloud>
+              </div>
+            </dpk-carousel>
+            <h3>Accomplishments</h3>
+            <ul class="accomplishment-list">
               <li v-for="(a, i) in work.accomplishments" :key="'accomplishment-' + i.toString()" v-html="a">
               </li>
             </ul>
           </div>
         </div>
-        <chart-pie :style="'opacity:' + work.stateVal.toString() + ';'" :chartdata="work.details.chart" :colors="colors" textcolor="#333333" title="" hovertitle="" :scale="work.stateVal > .5 ? 1 : work.stateVal * 2"></chart-pie>
       </div>
     </work-timepoint>
     <education-timepoint v-for="(edu, i) in events.education" :key="'edu-' + i.toString()" :year="edu.start" :month="edu.month" :start="start" :end="end" :details="edu.details" :shift="shift" v-on:point-selected="eduPointSelected" :sig="edu.id" :opacity="visProps.education">
@@ -42,16 +54,22 @@ import WorkTimepoint from './WorkTimepoint.vue'
 import EducationTimepoint from './EducationTimepoint.vue'
 import {TweenLite} from 'gsap'
 import ChartPie from './charts/ChartPie.vue'
+import ChartBar from './charts/ChartBar.vue'
+import ChartWordcloud from './charts/ChartWordcloud.vue'
 import Utilities from '../utils/Utilities.js'
 import WorkEvents from '../utils/WorkEvents.js'
 import EducationEvents from '../utils/EducationEvents.js'
+import DPKCarousel from './DPKCarousel.vue'
 export default {
   components: {
     'timepoint': Timepoint,
     'marker-timepoint': MarkerTimepoint,
     'work-timepoint': WorkTimepoint,
     'education-timepoint': EducationTimepoint,
-    'chart-pie': ChartPie
+    'chart-pie': ChartPie,
+    'chart-bar': ChartBar,
+    'chart-wordcloud': ChartWordcloud,
+    'dpk-carousel': DPKCarousel
   },
   data () {
     return {
@@ -72,7 +90,8 @@ export default {
         experience: 0,
         education: 0,
         about: 0
-      }
+      },
+      chartTypes: Utilities.ChartTypes
     }
   },
   methods: {
@@ -174,7 +193,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .dpk-timeline-component{
   position: absolute;
   width: 100vw;
@@ -183,14 +202,14 @@ export default {
   bottom: 0px;
   min-height: 700px;
   overflow: hidden;
-}
-.dpk-timeline-component .timeline-line{
-  position: absolute;
-  top:0;
-  left:50%;
-  width: 2px;
-  background-color: #999999;
-  height: 100%;
+  .timeline-line{
+    position: absolute;
+    top:0;
+    left:50%;
+    width: 2px;
+    background-color: #999999;
+    height: 100%;
+  }
 }
 ul.main-menu {
   display:block;
@@ -202,52 +221,91 @@ ul.main-menu {
   height:40px;
   padding:0;
   margin:0;
+  > li {
+    display:inline-block;
+    padding:0;
+    margin:0;
+    width:32%;
+    text-align:center;
+    > label{
+      padding: 4px 6px;
+      
+    }
+  }
 }
 
-ul.main-menu > li {
-  display:inline-block;
-  padding:0;
-  margin:0;
-  width:32%;
-  text-align:center;
-}
-
-ul.main-menu > li > label{
-  padding: 4px 6px;
-  
-}
 .dpk-timeline-chart{
   z-index: 10;
   position:relative;
 }
 .work-chart-bg{
+  h3{
+    font-size: 16px;
+    color: #333333;
+  }
   position: absolute;
   width: 320px;
   height: auto;
   left: 0;
   top: 0;
   margin-left: -150px;
-  margin-top: -112px;
+  margin-top: -152px;
   background-color: rgba(255,255,255,.9);
   box-shadow: 0 0 0 1px #000000 inset;  
+  max-height: 75vh;
+  overflow: auto;
+  > div{
+    width: 286px;
+    margin: 0 auto;
+    position:relative;
+    z-index: 2;
+    > h2{
+      width: 100%;
+      height: 100%;
+      border-radius: 200px;
+      font-size: 18px;
+      color: #333333;
+      margin: 16px 0px 3px 0;
+      font-weight: bold;
+    }
+    > p{
+      padding: 0;
+      margin: 0;
+    }
+    > ul {
+      margin:0;
+      padding:0;
+      > li{
+        display:block;
+        margin:0;
+      }
+    }
+    > ul.accomplishment-list{
+      margin-top: 0;
+      width:100%;
+      > li{
+        box-shadow: 0 1px 0 rgba(0,0,0,.3) inset;
+        padding: 8px 4px;
+      }
+    }
+  }
 }
-.work-chart-bg > div{
-  width: 286px;
-  margin: 0 auto;
+div.left-portion{
+  width: 50%;
+  left:0;
+  top:0;
+  bottom:0;
+  height:100%;
+  position:absolute;
+  background-color: #f0f000;
 }
-.work-chart-bg > div > h3{
-    width: 100%;
-    height: 100%;
-    border-radius: 200px;
-    font-size: 16px;
-    color: #999;
-    margin: 16px 0px 3px 0;
-}
-.work-chart-bg > div > p{
-  padding: 0;
-  margin: 0;
-}
-.work-chart-bg > div > ul{
-  margin-top: 230px;
+div.right-portion{
+  width: 50%;
+  right:0;
+  top:0;
+  bottom:0;
+  height:100%;
+  position:absolute;
+  background-color: #f000f0;
 }
 </style>

@@ -1,21 +1,15 @@
 <template>
-  <div class="pie-chart">
+  <div class="echarts-chart">
     <div v-bind:id="chartid"></div>
   </div>
 </template>
 <script>
-  import echarts from 'echarts'
+  import BaseChart from './BaseChart.js'
+  require('echarts-wordcloud')
   export default {
-    data () {
-      return {
-        message: 'sup dude',
-        chartid: 'CHART_' + Math.random().toString().split('.').join('') + Math.random().toString().split('.').join('') + Math.random().toString().split('.').join(''),
-        chartObject: undefined
-      }
-    },
-    props: ['chartdata', 'colors', 'textcolor', 'title', 'hovertitle'],
+    extends: BaseChart,
     methods: {
-      buildChart: function () {
+      buildChart: function (co) {
         var self = this
         if (document.getElementById(self.$data.chartid) !== undefined) {
           var _data = []
@@ -40,15 +34,6 @@
               trigger: 'item',
               formatter: '{a} <br/>{b}: {c} ({d}%)'
             },
-            // legend: {
-            //   orient: 'vertical',
-            //   x: 'left',
-            //   y: 'center',
-            //   data: _keys,
-            //   textStyle: {
-            //     color: self.textcolor
-            //   }
-            // },
             series: [
               {
                 name: self.hovertitle,
@@ -75,17 +60,9 @@
               }
             ]
           }
-          console.log(self.$data.chartObject)
-          self.$data.chartObject.setOption(option)
+          co.setOption(option)
         }
       }
-    },
-    mounted: function () {
-      var self = this
-      self.$data.chartObject = echarts.init(document.getElementById(self.$data.chartid))
-      setTimeout(function () {
-        self.buildChart()
-      }, 1000)
     }
   }
 </script>
