@@ -207,8 +207,9 @@ export default {
     top:0;
     left:50%;
     width: 2px;
-    background-color: #999999;
     height: 100%;
+    background-color: #ffffff;
+    margin-left: -.5px;
   }
 }
 ul.main-menu {
@@ -308,5 +309,19 @@ div.right-portion{
   height:100%;
   position:absolute;
   background-color: #f000f0;
+}
+.connector{
+  position: absolute;
+  top: 9px;
+  width: 16px;
+  height: 1px;
+  background-color: #ffffff;
+}
+.left-connector{
+  margin-left: 16px;
+  top: 10px;
+}
+.right-connector{
+  margin-left: -11px;
 }
 </style>
