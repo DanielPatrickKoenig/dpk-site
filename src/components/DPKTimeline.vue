@@ -3,13 +3,13 @@
     <div class="left-portion"></div>
     <div class="right-portion"></div>
     <ul class="main-menu">
-      <li v-on:click="sectionSelected({year: 1975, month: 0, day: 1}, {year: 2021, month: 0, day: 1}, 'about')">
+      <li v-on:click="aboutSelected()">
         About
       </li>
-      <li v-on:click="sectionSelected({year: 1998, month: 0, day: 1}, {year: 2012, month: 0, day: 1}, 'experience')">
+      <li v-on:click="experienceSelected()">
         Experience
       </li>
-      <li v-on:click="sectionSelected({year: 1993, month: 0, day: 1}, {year: 2000, month: 0, day: 1}, 'education')">
+      <li v-on:click="educationSelected()">
         Education
       </li>
     </ul>
@@ -19,7 +19,9 @@
     <marker-timepoint v-for="(marker, i) in events.markers" :key="'marker-' + i.toString()" :year="marker" :start="start" :end="end" :shift="shift"></marker-timepoint>
     <work-timepoint v-for="(work, i) in events.experience" :key="'work-' + i.toString()" :year="work.start" :month="work.month" :start="start" :end="end" :details="work.details" :shift="shift" v-on:point-selected="workPointSelected" :sig="work.id" :opacity="visProps.experience">
       <div class="dpk-timeline-chart" v-if="work.stateVal > 0">
+        <div class="pod-overlay" :style="'opacity:' + work.stateVal.toString() + ';'" v-on:click="experienceSelected()"></div>
         <div class="work-chart-bg" :style="'opacity:' + work.stateVal.toString() + ';'">
+          <a class="pod-close-button" v-on:click="experienceSelected()"></a>
           <div>
             <h2>{{work.details.company}}</h2>
             <p>{{work.details.title}}</p>
@@ -44,6 +46,19 @@
       </div>
     </work-timepoint>
     <education-timepoint v-for="(edu, i) in events.education" :key="'edu-' + i.toString()" :year="edu.start" :month="edu.month" :start="start" :end="end" :details="edu.details" :shift="shift" v-on:point-selected="eduPointSelected" :sig="edu.id" :opacity="visProps.education">
+      <div class="dpk-timeline-chart" v-if="edu.stateVal > 0">
+        <div class="pod-overlay" :style="'opacity:' + edu.stateVal.toString() + ';'" v-on:click="educationSelected()"></div>
+        <div class="work-chart-bg" :style="'opacity:' + edu.stateVal.toString() + ';'">
+          <a class="pod-close-button" v-on:click="educationSelected()"></a>
+          <div>
+            <h2>{{edu.details.school}}</h2>
+            <p>{{edu.details.degree}}</p>
+            <p>Graduated {{edu.end.toString()}}</p>
+            <img :src="edu.details.logo" />
+            <div v-html="edu.details.summary"></div>
+          </div>
+        </div>
+      </div>
     </education-timepoint>
   </div>
 </template>
@@ -95,6 +110,15 @@ export default {
     }
   },
   methods: {
+    aboutSelected: function () {
+      this.sectionSelected({year: 1975, month: 0, day: 1}, {year: 2021, month: 0, day: 1}, 'about')
+    },
+    experienceSelected: function () {
+      this.sectionSelected({year: 1998, month: 0, day: 1}, {year: 2012, month: 0, day: 1}, 'experience')
+    },
+    educationSelected: function () {
+      this.sectionSelected({year: 1993, month: 0, day: 1}, {year: 2000, month: 0, day: 1}, 'education')
+    },
     shiftTest: function (e) {
       let self = this
       self.shiftTo(1998, 2013)
@@ -137,6 +161,9 @@ export default {
       self.shiftTo({year: e.year - 2, month: e.month, day: 1}, {year: e.year + 1, month: e.month, day: 1})
     },
     eduPointSelected: function (e) {
+      let self = this
+      self.activatePoint('education', e.sig)
+      self.shiftTo({year: e.year - 2, month: e.month, day: 1}, {year: e.year + 1, month: e.month, day: 1})
     },
     activatePoint: function (type, sig) {
       let self = this
@@ -240,6 +267,21 @@ ul.main-menu {
   position:relative;
 }
 .work-chart-bg{
+  a.pod-close-button{
+    position:absolute;
+    display:inline-block;
+    top: 0px;
+    right: 6px;
+    font-size: 20px;
+    color: #ff0000;
+  }
+  a.pod-close-button::after{
+    content: "\2716";
+  }
+  img{
+    padding-top: 20px;
+    width: 100%;
+  }
   h3{
     font-size: 16px;
     color: #333333;
@@ -348,4 +390,68 @@ div.dpk-carousel{
     bottom: 13px !important;
   }
 }
+.inner-dot{
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  margin: 5px;
+  margin: 5px;
+  box-shadow: 0 0 0 1px #ffffff;
+}
+
+.event-list{
+  position: absolute;
+  width: 120px;
+  display:inline-block;
+  top: 10px;
+  left: 10px;
+  margin:0;
+  padding: 0;
+  margin-top: -18px;
+  box-shadow: 0 0 0 1px #ffffff inset;
+  border-radius: 5px;
+  background-color: rgba(255,255,255,.85);
+  
+}
+.left-list{
+  margin-left: 20px;
+}
+.right-list{
+  margin-left: -140px;
+}
+.event-list > li{
+  display: block;
+  margin:0;
+  padding: 4px;
+  font-size:12px;
+}
+.event-list > li:first-child{
+  padding-bottom:0;
+  font-weight:bold;
+}
+.event-list > li:last-child{
+  padding-top:0;
+}
+div.pod-overlay{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background-color: rgba(0,0,0,.3);
+}
+/*
+@media screen and (min-width: 700px) {
+  .work-chart-bg{
+    width: 700px;
+    margin-left: -340px;
+  }
+  div.dpk-carousel{
+    height: 251px;
+    overflow: hidden !important;
+    width:286px !important;
+  }
+}
+*/
 </style>
