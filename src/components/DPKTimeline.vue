@@ -23,24 +23,28 @@
         <div class="work-chart-bg" :style="'opacity:' + work.stateVal.toString() + ';'">
           <a class="pod-close-button" v-on:click="experienceSelected()"></a>
           <div>
-            <h2>{{work.details.company}}</h2>
-            <p>{{work.details.title}}</p>
-            <p>{{work.start.toString()}} - {{work.end > 0 ? work.end.toString() : 'Present'}}</p>
-            <dpk-carousel :items="work.details.charts" :contentwidth="120" :autoplay="true">
-              <div v-for="(chart, i) in work.details.charts" :key="'chart-' + i.toString()" :slot="'item-' + i.toString()">
-                <h3>
-                  {{chart.title}}
-                </h3>
-                <chart-pie v-if="chart.type === chartTypes.PIE" :style="'opacity:' + work.stateVal.toString() + ';'" :chartdata="chart.data" :colors="colors" textcolor="#333333" title="" hovertitle="" :scale="work.stateVal > .5 ? 1 : work.stateVal * 2"></chart-pie>
-                <chart-bar v-if="chart.type === chartTypes.BAR" :style="'opacity:' + work.stateVal.toString() + ';'" :chartdata="chart.data" :colors="colors" textcolor="#333333" title="" hovertitle="" :scale="work.stateVal > .5 ? 1 : work.stateVal * 2"></chart-bar>
-                <chart-wordcloud v-if="chart.type === chartTypes.WORDCLOUD" :style="'opacity:' + work.stateVal.toString() + ';'" :chartdata="chart.data" :colors="colors" textcolor="#333333" title="" hovertitle="" :scale="work.stateVal > .5 ? 1 : work.stateVal * 2"></chart-wordcloud>
-              </div>
-            </dpk-carousel>
-            <h3>Accomplishments</h3>
-            <ul class="accomplishment-list">
-              <li v-for="(a, i) in work.accomplishments" :key="'accomplishment-' + i.toString()" v-html="a">
-              </li>
-            </ul>
+            <div>
+              <h2>{{work.details.company}}</h2>
+              <p>{{work.details.title}}</p>
+              <p>{{work.start.toString()}} - {{work.end > 0 ? work.end.toString() : 'Present'}}</p>
+              <dpk-carousel :items="work.details.charts" :contentwidth="120" :autoplay="true">
+                <div v-for="(chart, i) in work.details.charts" :key="'chart-' + i.toString()" :slot="'item-' + i.toString()">
+                  <h3>
+                    {{chart.title}}
+                  </h3>
+                  <chart-pie v-if="chart.type === chartTypes.PIE" :style="'opacity:' + work.stateVal.toString() + ';'" :chartdata="chart.data" :colors="colors" textcolor="#333333" title="" hovertitle="" :scale="work.stateVal > .5 ? 1 : work.stateVal * 2"></chart-pie>
+                  <chart-bar v-if="chart.type === chartTypes.BAR" :style="'opacity:' + work.stateVal.toString() + ';'" :chartdata="chart.data" :colors="colors" textcolor="#333333" title="" hovertitle="" :scale="work.stateVal > .5 ? 1 : work.stateVal * 2"></chart-bar>
+                  <chart-wordcloud v-if="chart.type === chartTypes.WORDCLOUD" :style="'opacity:' + work.stateVal.toString() + ';'" :chartdata="chart.data" :colors="colors" textcolor="#333333" title="" hovertitle="" :scale="work.stateVal > .5 ? 1 : work.stateVal * 2"></chart-wordcloud>
+                </div>
+              </dpk-carousel>
+            </div>
+            <div>
+              <h3>Accomplishments</h3>
+              <ul class="accomplishment-list">
+                <li v-for="(a, i) in work.accomplishments" :key="'accomplishment-' + i.toString()" v-html="a">
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -51,15 +55,30 @@
         <div class="work-chart-bg" :style="'opacity:' + edu.stateVal.toString() + ';'">
           <a class="pod-close-button" v-on:click="educationSelected()"></a>
           <div>
-            <h2>{{edu.details.school}}</h2>
-            <p>{{edu.details.degree}}</p>
-            <p>Graduated {{edu.end.toString()}}</p>
-            <img :src="edu.details.logo" />
-            <div v-html="edu.details.summary"></div>
+            <div>
+              <h2>{{edu.details.school}}</h2>
+              <p>{{edu.details.degree}}</p>
+              <p>Graduated {{edu.end.toString()}}</p>
+              <img :src="edu.details.logo" />
+            </div>
+            <div class="padded-div">
+              <div v-html="edu.details.summary"></div>
+            </div>
           </div>
         </div>
       </div>
     </education-timepoint>
+    <about-timepoint v-for="(a, i) in events.about" :key="'about-' + i.toString()" :year="a.start" :month="a.month" :start="start" :end="end" :details="a.details" :shift="shift" v-on:point-selected="aboutPointSelected" :sig="a.id" :opacity="visProps.about">
+      <div class="dpk-timeline-chart" v-if="a.stateVal > 0">
+        <div class="pod-overlay" :style="'opacity:' + a.stateVal.toString() + ';'" v-on:click="aboutSelected()"></div>
+        <div class="work-chart-bg" :style="'opacity:' + a.stateVal.toString() + ';'">
+          <a class="pod-close-button" v-on:click="aboutSelected()"></a>
+          <div class="padded-div">
+            <div v-html="a.details.summary"></div>
+          </div>
+        </div>
+      </div>
+    </about-timepoint>
   </div>
 </template>
 <script>
@@ -67,6 +86,7 @@ import Timepoint from './Timepoint.vue'
 import MarkerTimepoint from './MarkerTimepoint.vue'
 import WorkTimepoint from './WorkTimepoint.vue'
 import EducationTimepoint from './EducationTimepoint.vue'
+import AboutTimepoint from './AboutTimepoint.vue'
 import {TweenLite} from 'gsap'
 import ChartPie from './charts/ChartPie.vue'
 import ChartBar from './charts/ChartBar.vue'
@@ -74,6 +94,7 @@ import ChartWordcloud from './charts/ChartWordcloud.vue'
 import Utilities from '../utils/Utilities.js'
 import WorkEvents from '../utils/WorkEvents.js'
 import EducationEvents from '../utils/EducationEvents.js'
+import AboutEvents from '../utils/AboutEvents.js'
 import DPKCarousel from './DPKCarousel.vue'
 export default {
   components: {
@@ -81,6 +102,7 @@ export default {
     'marker-timepoint': MarkerTimepoint,
     'work-timepoint': WorkTimepoint,
     'education-timepoint': EducationTimepoint,
+    'about-timepoint': AboutTimepoint,
     'chart-pie': ChartPie,
     'chart-bar': ChartBar,
     'chart-wordcloud': ChartWordcloud,
@@ -93,7 +115,7 @@ export default {
         markers: [],
         experience: WorkEvents,
         education: EducationEvents,
-        about: []
+        about: AboutEvents
       },
       tlHeight: 0,
       start: new Date(),
@@ -111,7 +133,7 @@ export default {
   },
   methods: {
     aboutSelected: function () {
-      this.sectionSelected({year: 1975, month: 0, day: 1}, {year: 2021, month: 0, day: 1}, 'about')
+      this.sectionSelected({year: 1972, month: 0, day: 1}, {year: 2021, month: 0, day: 1}, 'about')
     },
     experienceSelected: function () {
       this.sectionSelected({year: 1998, month: 0, day: 1}, {year: 2012, month: 0, day: 1}, 'experience')
@@ -163,6 +185,11 @@ export default {
     eduPointSelected: function (e) {
       let self = this
       self.activatePoint('education', e.sig)
+      self.shiftTo({year: e.year - 2, month: e.month, day: 1}, {year: e.year + 1, month: e.month, day: 1})
+    },
+    aboutPointSelected: function (e) {
+      let self = this
+      self.activatePoint('about', e.sig)
       self.shiftTo({year: e.year - 2, month: e.month, day: 1}, {year: e.year + 1, month: e.month, day: 1})
     },
     activatePoint: function (type, sig) {
@@ -304,7 +331,7 @@ ul.main-menu {
     margin: 0 auto;
     position:relative;
     z-index: 2;
-    > h2{
+    h2{
       width: 100%;
       height: 100%;
       border-radius: 200px;
@@ -313,11 +340,11 @@ ul.main-menu {
       margin: 16px 0px 3px 0;
       font-weight: bold;
     }
-    > p{
+    p{
       padding: 0;
       margin: 0;
     }
-    > ul {
+    ul {
       margin:0;
       padding:0;
       > li{
@@ -325,7 +352,7 @@ ul.main-menu {
         margin:0;
       }
     }
-    > ul.accomplishment-list{
+    ul.accomplishment-list{
       margin-top: 0;
       width:100%;
       > li{
@@ -441,17 +468,53 @@ div.pod-overlay{
   bottom:0;
   background-color: rgba(0,0,0,.3);
 }
-/*
+.padded-div{
+  padding: 10px 0;
+}
+
 @media screen and (min-width: 700px) {
   .work-chart-bg{
     width: 700px;
     margin-left: -340px;
-  }
-  div.dpk-carousel{
-    height: 251px;
-    overflow: hidden !important;
-    width:286px !important;
+    > div{
+      width: auto;
+      max-height: 400px;
+      margin: 0;
+      
+      > div{
+        display:inline-block;
+        float: left;
+        
+      }
+      > div:first-child{
+        overflow: hidden;
+        max-width: 286px;
+        padding: 0 10px;
+      }
+      > div:last-child{
+        padding-left: 10px;
+        max-width: 350px;
+        max-height: 340px;
+        overflow-y: auto;
+        box-shadow: -1px 0 0 rgba(0,0,-0,.3);
+      }
+    }
   }
 }
-*/
+@media screen and (min-width: 1200px) {
+  .work-chart-bg{
+    width: 1200px;
+    margin-left: -590px;
+    > div{
+      > div:last-child{
+        padding-left: 10px;
+        max-width: 850px;
+        max-height: 340px;
+        overflow-y: auto;
+        box-shadow: -1px 0 0 rgba(0,0,-0,.3);
+      }
+    }
+  }
+}
+
 </style>
