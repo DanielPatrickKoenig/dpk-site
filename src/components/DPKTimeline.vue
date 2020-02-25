@@ -1,18 +1,21 @@
 <template>
   <div v-if="ready" :id="tlID" class="dpk-timeline-component">
+    <h1 class="title-container"><span class="dpk-name">Dan Koenig</span> <span class="division">|</span> Developer&nbsp;&nbsp;</h1>
     <div class="left-portion"></div>
     <div class="right-portion"></div>
-    <ul class="main-menu">
-      <li v-on:click="aboutSelected()">
+    <ul v-if="menuDimensions.margin.left > -250" class="main-menu" :style="'margin-left:' + menuDimensions.margin.left.toString() + 'px;'">
+      <li v-on:click="aboutSelected();toggleMenu();">
         About
       </li>
-      <li v-on:click="experienceSelected()">
+      <li v-on:click="experienceSelected();toggleMenu();">
         Experience
       </li>
-      <li v-on:click="educationSelected()">
+      <li v-on:click="educationSelected();toggleMenu();">
         Education
       </li>
+      <li class="close-menu-button" v-on:click="toggleMenu()">&lt;</li>
     </ul>
+    <div v-if="menuDimensions.margin.left > -250" class="main-menu-blocker" :style="'opacity:' + (0.25 - (menuDimensions.margin.left * -0.001)).toString() + ';'" v-on:click="toggleMenu()"></div>
     <div class="timeline-line">
         
     </div>
@@ -20,8 +23,7 @@
     <work-timepoint v-for="(work, i) in events.experience" :key="'work-' + i.toString()" :year="work.start" :month="work.month" :start="start" :end="end" :details="work.details" :shift="shift" v-on:point-selected="workPointSelected" :sig="work.id" :opacity="visProps.experience">
       <div class="dpk-timeline-chart" v-if="work.stateVal > 0">
         <div class="pod-overlay" :style="'opacity:' + work.stateVal.toString() + ';'" v-on:click="experienceSelected()"></div>
-        <div class="work-chart-bg" :style="'opacity:' + work.stateVal.toString() + ';'">
-          <a class="pod-close-button" v-on:click="experienceSelected()"></a>
+        <div class="section-chart-bg work-chart-bg" :style="'opacity:' + work.stateVal.toString() + ';'"> 
           <div>
             <div>
               <h2>{{work.details.company}}</h2>
@@ -46,14 +48,14 @@
               </ul>
             </div>
           </div>
+          <a class="pod-close-button" v-on:click="experienceSelected()"></a>
         </div>
       </div>
     </work-timepoint>
     <education-timepoint v-for="(edu, i) in events.education" :key="'edu-' + i.toString()" :year="edu.start" :month="edu.month" :start="start" :end="end" :details="edu.details" :shift="shift" v-on:point-selected="eduPointSelected" :sig="edu.id" :opacity="visProps.education">
       <div class="dpk-timeline-chart" v-if="edu.stateVal > 0">
         <div class="pod-overlay" :style="'opacity:' + edu.stateVal.toString() + ';'" v-on:click="educationSelected()"></div>
-        <div class="work-chart-bg" :style="'opacity:' + edu.stateVal.toString() + ';'">
-          <a class="pod-close-button" v-on:click="educationSelected()"></a>
+        <div class="section-chart-bg" :style="'opacity:' + edu.stateVal.toString() + ';'">
           <div>
             <div>
               <h2>{{edu.details.school}}</h2>
@@ -65,20 +67,37 @@
               <div v-html="edu.details.summary"></div>
             </div>
           </div>
+          <a class="pod-close-button" v-on:click="educationSelected()"></a>
         </div>
       </div>
     </education-timepoint>
     <about-timepoint v-for="(a, i) in events.about" :key="'about-' + i.toString()" :year="a.start" :month="a.month" :start="start" :end="end" :details="a.details" :shift="shift" v-on:point-selected="aboutPointSelected" :sig="a.id" :opacity="visProps.about">
       <div class="dpk-timeline-chart" v-if="a.stateVal > 0">
         <div class="pod-overlay" :style="'opacity:' + a.stateVal.toString() + ';'" v-on:click="aboutSelected()"></div>
-        <div class="work-chart-bg" :style="'opacity:' + a.stateVal.toString() + ';'">
-          <a class="pod-close-button" v-on:click="aboutSelected()"></a>
+        <div class="section-chart-bg" :style="'opacity:' + a.stateVal.toString() + ';'">
           <div class="padded-div">
+            <div v-html="a.details.label" class="about-label-div"></div>
             <div v-html="a.details.summary"></div>
           </div>
+          <a class="pod-close-button" v-on:click="aboutSelected()"></a>
         </div>
       </div>
     </about-timepoint>
+    <div class="menu-button-container" :style="'width:' + menuButtonDimensions.size.width.toString() + 'px;height:' + menuButtonDimensions.size.height.toString() + 'px;left:' + menuButtonDimensions.position.left.toString() + '%;top:' + menuButtonDimensions.position.top.toString() + '%;margin-left:' + menuButtonDimensions.margin.left.toString() + 'px;margin-top:' + menuButtonDimensions.margin.top.toString() + 'px;'">
+      <ul v-if="menuButtonDimensions.size.width >= 300">
+        <li v-on:click="aboutSelected();shiftMenuButton();">
+          About
+        </li>
+        <li v-on:click="experienceSelected();shiftMenuButton();">
+          Experience
+        </li>
+        <li v-on:click="educationSelected();shiftMenuButton();">
+          Education
+        </li>
+      </ul>
+      <img src="src/assets/bars.svg" />
+      <div v-if="menuButtonDimensions.size.width < 100" v-on:click="toggleMenu()"></div>
+    </div>
   </div>
 </template>
 <script>
@@ -128,10 +147,40 @@ export default {
         education: 0,
         about: 0
       },
-      chartTypes: Utilities.ChartTypes
+      chartTypes: Utilities.ChartTypes,
+      menuButtonDimensions: {
+        size: {
+          width: 300,
+          height: 300
+        },
+        position: {
+          left: 50,
+          top: 50
+        },
+        margin: {
+          left: -150,
+          top: -150
+        }
+      },
+      menuDimensions: {
+        margin: {
+          left: -250
+        }
+      }
     }
   },
   methods: {
+    shiftMenuButton: function () {
+      let self = this
+      TweenLite.to(self.$data.menuButtonDimensions.size, 0.5, {width: 44, height: 44})
+      TweenLite.to(self.$data.menuButtonDimensions.position, 0.5, {left: 0, top: 0})
+      TweenLite.to(self.$data.menuButtonDimensions.margin, 0.5, {left: 0, top: 0})
+    },
+    toggleMenu: function () {
+      let self = this
+      let menuMargin = self.$data.menuDimensions.margin.left < 0 ? 0 : -250
+      TweenLite.to(self.$data.menuDimensions.margin, 0.5, {left: menuMargin})
+    },
     aboutSelected: function () {
       this.sectionSelected({year: 1972, month: 0, day: 1}, {year: 2021, month: 0, day: 1}, 'about')
     },
@@ -252,7 +301,7 @@ export default {
   position: absolute;
   width: 100vw;
   height: auto;
-  top: 40px;
+  top: 0px;
   bottom: 0px;
   min-height: 700px;
   overflow: hidden;
@@ -266,26 +315,46 @@ export default {
     margin-left: -.5px;
   }
 }
+div.main-menu-blocker{
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background-color: #333333;
+  z-index: 300;
+}
 ul.main-menu {
   display:block;
   position:fixed;
   top:0;
   left:0;
-  right:0;
-  width: 100vw;
-  height:40px;
-  padding:0;
+  bottom:0;
+  width: 250px;
+  height:100vh;
+  padding:50px 0 0 0;
   margin:0;
+  background-color: rgba(255,255,255,.9);
+  z-index: 301;
   > li {
-    display:inline-block;
+    display:block;
+    font-weight: bold;
     padding:0;
     margin:0;
-    width:32%;
-    text-align:center;
-    > label{
-      padding: 4px 6px;
-      
-    }
+    text-align:left;
+    padding: 14px 10px 14px 50px;
+    box-shadow: 0 -1px 0 rgba(0,0,0,.2);
+  }
+  > li.close-menu-button{
+    position: absolute;
+    top: 0;
+    right:0;
+    padding: 10px;
+    font-size: 30px;
+    width: 44px;
+    height: 44px;
+    text-align: right;
+    box-shadow: none;
   }
 }
 
@@ -293,7 +362,8 @@ ul.main-menu {
   z-index: 10;
   position:relative;
 }
-.work-chart-bg{
+.section-chart-bg{
+  z-index: 260;
   a.pod-close-button{
     position:absolute;
     display:inline-block;
@@ -362,6 +432,43 @@ ul.main-menu {
     }
   }
 }
+/* The animation code */
+@keyframes left-transition {
+  0%  {background-color: #DB166C;}
+  10% {background-color: #B558A2;}
+  20% {background-color: #1F8B95;}
+  30% {background-color: #5E79BB;}
+  40% {background-color: #5A6571;}
+  50% {background-color: #5E79BB;}
+  60% {background-color: #EB7523;}
+  70% {background-color: #432256;}
+  80% {background-color: #2bb3cd;}
+  90% {background-color: #66342d;}
+  100% {background-color: #DB166C;}
+}
+
+@keyframes right-transition {
+  0%  {background-color: #8fc23e;}
+  10% {background-color: #fdbe40;}
+  20% {background-color: #dc527d;}
+  30% {background-color: #7d8f9e;}
+  40% {background-color: #9a605b;}
+  50% {background-color: #dc1c4a;}
+  60% {background-color: #50b86b;}
+  70% {background-color: #1f8b95;}
+  80% {background-color: #eb7523;}
+  90% {background-color: #2276bb;}
+  100% {background-color: #8fc23e;}
+}
+
+/* The element to apply the animation to */
+// div {
+//   width: 100px;
+//   height: 100px;
+//   background-color: red;
+//   animation-name: left-transition;
+//   animation-duration: 4s;
+// }
 div.left-portion{
   width: 50%;
   left:0;
@@ -369,7 +476,10 @@ div.left-portion{
   bottom:0;
   height:100%;
   position:absolute;
-  background-color: #f0f000;
+  background-color: #DB166C;
+  animation-name: left-transition;
+  animation-duration: 100s;
+  animation-iteration-count: infinite;
 }
 div.right-portion{
   width: 50%;
@@ -378,7 +488,10 @@ div.right-portion{
   bottom:0;
   height:100%;
   position:absolute;
-  background-color: #f000f0;
+  background-color: #8fc23e;
+  animation-name: right-transition;
+  animation-duration: 100s;
+  animation-iteration-count: infinite;
 }
 .connector{
   position: absolute;
@@ -471,9 +584,71 @@ div.pod-overlay{
 .padded-div{
   padding: 10px 0;
 }
+div.menu-button-container{
+  position: fixed;
+  z-index: 210;
+  > img{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top:0;
+    left:0;
+  }
+  > div{
+    position: absolute;
+    top:0;
+    right:0;
+    left: 0;
+    bottom:0;
 
+  }
+  > ul {
+    margin:79px 0 0 0;
+    padding:0;
+    width: 100%;
+    position: relative;
+    z-index: 220;
+    > li{
+      display:block;
+      width: 100%;
+      padding:5px;
+      margin:0 0 30px 0;
+      text-align: center;
+      color: #333333;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+  }
+}
+h1.title-container{
+  position: fixed;
+  z-index: 1;
+  color: rgba(255,255,255,.8);
+  background-color: rgba(0, 0, 0, 0.6);
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 34px;
+  padding: 11px 8px 0 0;
+  margin: 0;
+  font-size: 14px;
+  text-align: center;
+  > span.dpk-name {
+    font-weight: bold;
+    color: rgba(255,255,255,.8);
+  }
+  > span.division{
+    opacity: 0;
+  }
+}
+@media screen and (min-width: 350px) {
+  h1.title-container{
+    font-size: 20px;
+    
+  }
+}
 @media screen and (min-width: 700px) {
-  .work-chart-bg{
+  .section-chart-bg{
     width: 700px;
     margin-left: -340px;
     > div{
@@ -501,20 +676,109 @@ div.pod-overlay{
     }
   }
 }
-@media screen and (min-width: 1200px) {
-  .work-chart-bg{
-    width: 1200px;
-    margin-left: -590px;
+@media screen and (min-width: 1000px) {
+  .section-chart-bg.work-chart-bg{
+    width: 1000px;
+    margin-left: -490px;
+    min-height: 650px;
+    box-shadow: 0 0 0 1px #000000 inset, -395px 0 0 rgba(255,355,255, 1) inset, -396px 0 0 rgba(0,0,0, 0.1) inset;
     > div{
-      > div:last-child{
-        padding-left: 10px;
-        max-width: 850px;
-        max-height: 340px;
-        overflow-y: auto;
-        box-shadow: -1px 0 0 rgba(0,0,-0,.3);
+      > div:first-child{
+        overflow: visible;
+        width: 300px;
+        
+        > h2, p{
+          padding-left: 11px;
+          font-weight:bold;
+          font-size: 20px;
+        }
+        > h2 {
+          font-size: 30px;
+        }
       }
+      > div:last-child{
+        max-width: 580px;
+        min-width: 580px;
+        max-height: 540px;
+        margin-left: -295px;
+        margin-top: 116px;
+        box-shadow: none;
+      }
+    }
+  }
+  div.dpk-carousel{
+    height: 251px;
+    overflow: visible !important;
+    > ul{
+      margin: 0 !important;
+      right: -640px !important;
+      position: absolute;
+      width: 286px !important;
+      top: -75px;
+      > li{
+        display:block !important;
+      }
+      > li:not(:last-child){
+        margin-bottom: 50px !important;
+      }
+      
+    }
+    .right-switch{
+      display:none !important;
+    }
+    .left-switch{
+      display:none !important;
+    }
+    .dpk-carousel-marker-container{
+      display:none;
     }
   }
 }
 
+@media screen and (min-width: 1400px) {
+  .section-chart-bg.work-chart-bg{
+    width: 1400px;
+    margin-left: -690px;
+    min-height: 756px;
+    overflow: hidden;
+    > div{
+      > div:last-child{
+        max-width: 960px;
+        min-width: 960px;
+        max-height: 540px;
+      }
+    }
+  }
+  div.dpk-carousel{
+    height: 251px;
+    overflow: visible !important;
+    > ul{
+      margin: 0 !important;
+      right: -1025px !important;
+      position: absolute;
+      width: 286px !important;
+      top: -75px;
+      > li{
+        display:block !important;
+      }
+      
+    }
+    .right-switch{
+      display:none !important;
+    }
+    .left-switch{
+      display:none !important;
+    }
+    .dpk-carousel-marker-container{
+      display:none;
+    }
+  }
+}
+
+</style>
+<style>
+div.about-label-div > span{
+  font-size: 286px;
+  color: rgba(0,0,0,.2);
+}
 </style>

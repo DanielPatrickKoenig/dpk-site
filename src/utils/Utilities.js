@@ -1,7 +1,7 @@
 function generateID () {
   return 'el-' + Math.random().toString().split('.').join('') + '-' + Math.random().toString().split('.').join('') + '-' + Math.random().toString().split('.').join('')
 }
-const ChartColors = ['#00aeef', '#fdc689', '#7cc576', '#f26d7d', '#a186be', '#ec008c', '#c69c6d', '#ed145b', '#f26522', '#acd373', '#aba000', '#f5989d']
+const ChartColors = ['#DB166C', '#2bb3cd', '#fdbe40', '#7d8f9e', '#5E79BB', '#EB7523', '#432256', '#2bb3cd', '#66342d', '#8fc23e', '#fdbe40', '#dc527d']
 const ChartTypes = {
   PIE: 0,
   BAR: 1,

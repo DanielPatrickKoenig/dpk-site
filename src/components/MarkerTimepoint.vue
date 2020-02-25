@@ -9,7 +9,7 @@ export default {
   extends: BaseTimepoint,
   methods: {
     getExtraStyle: function () {
-      return 'left:0;width:100%;height:30px;position:absolute;box-shadow:0 -1px 0 rgba(0, 0, 0, .5);opacity:.4;'
+      return 'left:0;width:100%;height:30px;position:absolute;box-shadow:0 -1px 0 rgba(255, 255, 255, .5);opacity:.4;color:rgba(255, 255, 255, .5);'
     }
   }
 }
