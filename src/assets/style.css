@@ -1,4 +1,61 @@
 @font-face {
+  font-family: "CenturyGothic";
+  src: url("fonts/CenturyGothic.ttf");
+}
+@font-face {
+  font-family: "CenturyGothic-BoldItalic";
+  src: url("fonts/centurygothicbolditalic.ttf");
+}
+
+/*
+@font-face {
+  font-family: "ArialNarrow";
+  src: url("fonts/arialnarrow.ttf"),url("fonts/arialnarrow.eot");
+}
+@font-face {
+  font-family: "ArialNarrow-Bold";
+  src: url("fonts/arialnarrowbold.ttf"),url("fonts/arialnarrowbold.eot");
+}
+@font-face {
+  font-family: "Nunito-Medium";
+  src: url("fonts/CenturyGothic.ttf");
+}
+
+@font-face {
+  font-family: "Arial Narrow Italic";
+  src: url("fonts/arialnarrowitalic.ttf"),url("fonts/arialnarrowitalic.eot");
+}
+@font-face {
+  font-family: "Arial Narrow Bold Italic";
+  src: url("fonts/arialnarrowbolditalic.ttf"),url("fonts/arialnarrowbolditalic.eot");
+}
+
+
+@font-face {
+  font-family: "Segoe Regular";
+  src: url('fonts/segoeuiregular.ttf'), url('fonts/segoeuiregular.eot');
+}
+@font-face {
+  font-family: "Segoe Black";
+  src: url('fonts/seguibl.ttf'), url('fonts/seguibl.eot');
+}
+@font-face {
+  font-family: "Segoe Light";
+  src: url('fonts/SEGOEUIL.ttf'), url('fonts/SEGOEUIL.eot');
+}
+@font-face {
+  font-family: "Segoe Bold";
+  src: url('fonts/segoeuibold.ttf'), url('fonts/segoeuibold.eot');
+}
+
+@font-face {
+  font-family: 'barlow';
+  src:  url('fonts/Barlow-Condensed-Medium.ttf.eot');
+  src:  url('fonts/Barlow-Condensed-Medium.ttf.eot') format('embedded-opentype'), url('fonts/barlow-condensed.medium.ttf') format('truetype'), url('fonts/Barlow-Condensed-Medium.ttf.woff') format('woff'), url('fonts/Barlow-Condensed-Medium.ttf.svg') format('svg');
+  font-weight: normal;
+}
+*/
+@font-face {
   font-family: 'icomoon';
   src:  url('fonts/icomoon.eot?1s40qk');
   src:  url('fonts/icomoon.eot?1s40qk#iefix') format('embedded-opentype'),
