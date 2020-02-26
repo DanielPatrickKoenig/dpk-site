@@ -19,10 +19,11 @@ export default {
 </script>
 
 <style>
+
 body{
   padding: 0;
   margin:0;
-  font-family: Arial;
+  font-family: CenturyGothic;
 }
 #app {
 }
