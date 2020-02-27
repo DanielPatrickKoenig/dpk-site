@@ -95,8 +95,9 @@
           Education
         </li>
       </ul>
-      <img src="src/assets/bars.svg" />
-      <div v-if="menuButtonDimensions.size.width < 100" v-on:click="toggleMenu()"></div>
+      <img :style="menuButtonDimensions.size.width >= 300 ? 'opacity: 0;' : 'opacity:1;'" src="src/assets/bars.svg" />
+      <div v-if="menuButtonDimensions.size.width < 100" v-on:click="toggleMenu()"
+      ></div>
     </div>
   </div>
 </template>
@@ -607,11 +608,13 @@ div.menu-button-container{
 
   }
   > ul {
-    margin:77px 0 0 0;
-    padding:0;
-    width: 100%;
-    position: relative;
-    z-index: 220;
+    margin: -73px 0 0 -99px;
+    padding: 0;
+    width: 187px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 400;
     > li{
       display:block;
       width: 100%;
@@ -621,6 +624,9 @@ div.menu-button-container{
       color: #333333;
       font-weight: bold;
       text-transform: uppercase;
+      background-color:#ffffff;
+      border-radius: 50px;
+      opacity: 1;
     }
   }
 }
