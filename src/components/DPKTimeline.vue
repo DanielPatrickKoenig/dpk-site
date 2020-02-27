@@ -17,7 +17,7 @@
     </ul>
     <div v-if="menuDimensions.margin.left > -250" class="main-menu-blocker" :style="'opacity:' + (0.25 - (menuDimensions.margin.left * -0.001)).toString() + ';'" v-on:click="toggleMenu()"></div>
     <div class="timeline-line">
-        
+      
     </div>
     <marker-timepoint v-for="(marker, i) in events.markers" :key="'marker-' + i.toString()" :year="marker" :start="start" :end="end" :shift="shift"></marker-timepoint>
     <work-timepoint v-for="(work, i) in events.experience" :key="'work-' + i.toString()" :year="work.start" :month="work.month" :start="start" :end="end" :details="work.details" :shift="shift" v-on:point-selected="workPointSelected" :sig="work.id" :opacity="visProps.experience">
@@ -371,9 +371,12 @@ ul.main-menu {
     right: 6px;
     font-size: 20px;
     color: #ff0000;
+    z-index:800;
   }
   a.pod-close-button::after{
     content: "\2716";
+    
+
   }
   img{
     padding-top: 20px;
@@ -391,7 +394,8 @@ ul.main-menu {
   margin-left: -150px;
   margin-top: -210px;
   background-color: rgba(255,255,255,.9);
-  box-shadow: 0 0 0 1px #000000 inset;  
+  box-shadow: 0 0 0 1px #ffffff inset; 
+  border-radius: 7px; 
   max-height: 75vh;
   min-height: 400px;
   overflow-y: auto;
@@ -603,7 +607,7 @@ div.menu-button-container{
 
   }
   > ul {
-    margin:79px 0 0 0;
+    margin:77px 0 0 0;
     padding:0;
     width: 100%;
     position: relative;
@@ -612,7 +616,7 @@ div.menu-button-container{
       display:block;
       width: 100%;
       padding:5px;
-      margin:0 0 30px 0;
+      margin:0 0 27px 0;
       text-align: center;
       color: #333333;
       font-weight: bold;
@@ -681,7 +685,7 @@ h1.title-container{
     width: 1000px;
     margin-left: -490px;
     min-height: 650px;
-    box-shadow: 0 0 0 1px #000000 inset, -395px 0 0 rgba(255,355,255, 1) inset, -396px 0 0 rgba(0,0,0, 0.1) inset;
+    box-shadow: 0 0 0 1px #ffffff inset, -395px 0 0 rgba(255,355,255, 1) inset, -396px 0 0 rgba(0,0,0, 0.1) inset;
     > div{
       > div:first-child{
         overflow: visible;
