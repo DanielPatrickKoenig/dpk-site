@@ -13,6 +13,23 @@
       <li v-on:click="educationSelected();toggleMenu();">
         Education
       </li>
+      <li>
+        <label :for="tlID + '-contact-box'">Contact</label> <input type="checkbox" :id="tlID + '-contact-box'" style="display:none;" />
+        <ul class="contact-list">
+          <li class="phone-row">
+            <a tel="2482295491">&nbsp;Call Me</a>
+          </li>
+          <li class="email-row">
+            <a href="mailto:dpkoenig27@gmail.com">&nbsp;Email Me</a>
+          </li>
+        </ul>
+      </li>
+      <!-- <li v-on:click="experamentsSelected();toggleMenu();">
+        Experaments
+      </li> -->
+      <li v-on:click="portfolioSelected();toggleMenu();">
+        Work
+      </li>
       <li class="close-menu-button" v-on:click="toggleMenu()">&lt;</li>
     </ul>
     <div v-if="menuDimensions.margin.left > -250" class="main-menu-blocker" :style="'opacity:' + (0.25 - (menuDimensions.margin.left * -0.001)).toString() + ';'" v-on:click="toggleMenu()"></div>
@@ -99,6 +116,16 @@
       <div v-if="menuButtonDimensions.size.width < 100" v-on:click="toggleMenu()"
       ></div>
     </div>
+    <galery-modal v-if="galleryProps.experaments.opacity > 0" :style="'opacity:' + galleryProps.experaments.opacity.toString() + ';'" title="Experaments" v-on:close="onGalleryClosed" :items="galleryProps.experaments.items"></galery-modal>
+    <galery-modal v-if="galleryProps.portfolio.opacity > 0" :style="'opacity:' + galleryProps.portfolio.opacity.toString() + ';'" title="Portfolio" v-on:close="onGalleryClosed" :items="galleryProps.portfolio.items"></galery-modal>
+    <!-- <span class="call-text">248-229-5491</span>
+    <a class="call-link" tel="2482295491"><span class="call-icon"></span></a>
+    <a class="email-link" href="mailto:dpkoenig27@gmail.com"><span class="email-icon"></span><span class="email-text">dpkoenig27@gmail.com</span></a>
+    <svg class="right-nav-button">
+      <circle cx="20" cy="10" r="2"></circle>
+      <circle cx="20" cy="20" r="2"></circle>
+      <circle cx="20" cy="30" r="2"></circle>
+    </svg> -->
   </div>
 </template>
 <script>
@@ -116,6 +143,8 @@ import WorkEvents from '../utils/WorkEvents.js'
 import EducationEvents from '../utils/EducationEvents.js'
 import AboutEvents from '../utils/AboutEvents.js'
 import DPKCarousel from './DPKCarousel.vue'
+import GaleryModal from './GaleryModal.vue'
+import Portfolio from '../utils/Portfolio.js'
 export default {
   components: {
     'timepoint': Timepoint,
@@ -126,7 +155,8 @@ export default {
     'chart-pie': ChartPie,
     'chart-bar': ChartBar,
     'chart-wordcloud': ChartWordcloud,
-    'dpk-carousel': DPKCarousel
+    'dpk-carousel': DPKCarousel,
+    'galery-modal': GaleryModal
   },
   data () {
     return {
@@ -167,6 +197,16 @@ export default {
         margin: {
           left: -250
         }
+      },
+      galleryProps: {
+        experaments: {
+          opacity: 0,
+          items: []
+        },
+        portfolio: {
+          opacity: 0,
+          items: Portfolio
+        }
       }
     }
   },
@@ -183,13 +223,26 @@ export default {
       TweenLite.to(self.$data.menuDimensions.margin, 0.5, {left: menuMargin})
     },
     aboutSelected: function () {
-      this.sectionSelected({year: 1972, month: 0, day: 1}, {year: 2021, month: 0, day: 1}, 'about')
+      this.sectionSelected({year: 1971, month: 0, day: 1}, {year: 2024, month: 0, day: 1}, 'about')
     },
     experienceSelected: function () {
       this.sectionSelected({year: 1998, month: 0, day: 1}, {year: 2012, month: 0, day: 1}, 'experience')
     },
     educationSelected: function () {
       this.sectionSelected({year: 1993, month: 0, day: 1}, {year: 2000, month: 0, day: 1}, 'education')
+    },
+    experamentsSelected: function () {
+      let self = this
+      TweenLite.to(self.$data.galleryProps.experaments, 0.5, {opacity: 1})
+    },
+    portfolioSelected: function () {
+      let self = this
+      TweenLite.to(self.$data.galleryProps.portfolio, 0.5, {opacity: 1})
+    },
+    onGalleryClosed: function () {
+      let self = this
+      TweenLite.to(self.$data.galleryProps.experaments, 0.5, {opacity: 0})
+      TweenLite.to(self.$data.galleryProps.portfolio, 0.5, {opacity: 0})
     },
     shiftTest: function (e) {
       let self = this
@@ -651,6 +704,93 @@ h1.title-container{
     opacity: 0;
   }
 }
+
+ul.contact-list{
+  display:none;
+  margin:0;
+  padding:0;
+  > li{
+    display:block;
+    margin:0;
+    padding:5px 0;
+    > a{
+      text-decoration: none;
+    }
+  }
+  > li.phone-row{
+    > a::before{
+      content: "\260F";
+    }
+  }
+  > li.email-row{
+    > a::before{
+      content: "\2709";
+    }
+  }
+}
+
+input:checked + ul.contact-list
+{
+  display:block;
+}
+
+
+
+a.email-link{
+  display:inline-block;
+  width:40px;
+  height: 40px;
+  right: 2px;
+  bottom: 2px;
+  color: #ffffff;
+  position: fixed;
+  z-index: 0;
+  span.email-icon{
+    display:block;
+    width:100%;
+    height: 100%;
+    font-size: 30px;
+  }
+  span.email-icon::after{
+    content: "\2709";
+  }
+  span.email-text{
+    display:none;
+  }
+}
+a.call-link{
+  display:inline-block;
+  width:40px;
+  height: 40px;
+  right: 2px;
+  bottom: 48px;
+  color: #ffffff;
+  position: fixed;
+  z-index: 0;
+  span.call-icon{
+    display:block;
+    width:100%;
+    height: 100%;
+    font-size: 30px;
+  }
+  span.call-icon::after{
+    content: "\260F";
+  }
+}
+span.call-text{
+  display:none;
+}
+svg.right-nav-button{
+  width:40px;
+  height:40px;
+  z-index: 10;
+  position: fixed;
+  right:2px;
+  top:2px;
+  > circle{
+    fill:#ffffff;
+  }
+}
 @media screen and (min-width: 350px) {
   h1.title-container{
     font-size: 20px;
@@ -783,6 +923,31 @@ h1.title-container{
       display:none;
     }
   }
+  a.email-link{
+    width:auto;
+    height: auto;
+    right: 20px;
+    bottom:20px;
+    span.email-icon{
+      display:none;
+    }
+    span.email-text{
+      display:inline-block;
+      font-size: 12px;
+    }
+  }
+  a.call-link{
+    display:none;
+  }
+  span.call-text{
+    display:inline-block;
+    
+    color: #ffffff;
+    position: fixed;
+    font-size: 12px;
+    right: 20px;
+    bottom:51px;
+  }
 }
 
 </style>
@@ -790,5 +955,8 @@ h1.title-container{
 div.about-label-div > span{
   font-size: 286px;
   color: rgba(0,0,0,.2);
+}
+div.about-label-div + div > p:first-child{
+  font-weight:bold;
 }
 </style>
