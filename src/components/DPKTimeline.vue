@@ -4,14 +4,14 @@
     <div class="left-portion"></div>
     <div class="right-portion"></div>
     <ul v-if="menuDimensions.margin.left > -250" class="main-menu" :style="'margin-left:' + menuDimensions.margin.left.toString() + 'px;'">
-      <li v-on:click="aboutSelected();toggleMenu();">
-        About
-      </li>
       <li v-on:click="experienceSelected();toggleMenu();">
         Experience
       </li>
       <li v-on:click="educationSelected();toggleMenu();">
         Education
+      </li>
+      <li v-on:click="aboutSelected();toggleMenu();">
+        About
       </li>
       <li>
         <label :for="tlID + '-contact-box'">Contact</label> <input type="checkbox" :id="tlID + '-contact-box'" style="display:none;" />
@@ -102,14 +102,14 @@
     </about-timepoint>
     <div class="menu-button-container" :style="'width:' + menuButtonDimensions.size.width.toString() + 'px;height:' + menuButtonDimensions.size.height.toString() + 'px;left:' + menuButtonDimensions.position.left.toString() + '%;top:' + menuButtonDimensions.position.top.toString() + '%;margin-left:' + menuButtonDimensions.margin.left.toString() + 'px;margin-top:' + menuButtonDimensions.margin.top.toString() + 'px;'">
       <ul v-if="menuButtonDimensions.size.width >= 300">
-        <li v-on:click="aboutSelected();shiftMenuButton();">
-          About
-        </li>
         <li v-on:click="experienceSelected();shiftMenuButton();">
           Experience
         </li>
         <li v-on:click="educationSelected();shiftMenuButton();">
           Education
+        </li>
+        <li v-on:click="aboutSelected();shiftMenuButton();">
+          About
         </li>
       </ul>
       <img :style="menuButtonDimensions.size.width >= 300 ? 'opacity: 0;' : 'opacity:1;'" src="src/assets/bars.svg" />

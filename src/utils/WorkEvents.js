@@ -68,8 +68,8 @@ const WorkEvents = [
       ]
     },
     accomplishments: [
-      'Created th company&#39;s first interactive, cd rom based, annual report.',
-      'Provided design expertise in the creation of annual reports and consumer product packaging for brands such as Abbod Labs, Goody, Avery Dennison and many more.'
+      'Created the company&#39;s first interactive, cd rom based, annual report.',
+      'Provided design expertise in the creation of annual reports and consumer product packaging for brands such as Abbot Labs, Goody, Avery Dennison and many more.'
     ]
   },
   {
@@ -110,9 +110,9 @@ const WorkEvents = [
     },
     accomplishments: [
       'Enhanced capabilities to include interactive deliverables.',
-      'Worked with model maker to generate digital representations of in store displays for brands such as Absolute Vodka, Mars, Firestone and many more.',
-      'Provided design expertise in the creation of product packaging for Homack and Kobalt.',
-      'Streamlined display prototyping process by providing 3D modeling capabilities to process'
+      'Worked with model maker to generate digital representations of in-store displays for brands such as Absolute Vodka, Mars, Firestone and many more.',
+      'Provided design expertise in the creation of product packaging for Homak and Kobalt.',
+      'Streamlined display prototyping process by providing 3D modeling capabilities to the process'
     ]
   },
   {
@@ -187,9 +187,9 @@ const WorkEvents = [
       ]
     },
     accomplishments: [
-      'Worked with the technical writers, scientists and safety specialists to develop material for training corses.',
-      'Developed safety cources for ratiation, error proofing, electrical safety and many more.',
-      'Elevated the efficiency of workflow and quality of e-learning material with reusable ui and animation algorithms.'
+      'Worked with technical writers, scientists and safety specialists to develop material for training courses.',
+      'Developed safety course for radiation, error proofing, electrical safety and many more.',
+      'Elevated the efficiency of workflow and quality of e-learning material with reusable UI and animation algorithms.'
     ]
   },
   {
@@ -226,8 +226,9 @@ const WorkEvents = [
     },
     accomplishments: [
       'Developed a code library for streamlining the production of e-learning courses.',
-      'Salvaged several, assumed to be, failed projects making them profitalbe and successful.',
-      'Trained the production and best practices of e-learning development.'
+      'Salvaged several, assumed to be, failed projects making them profitable and successful.',
+      'Trained other developers on the production and best practices of e-learning development.'
+
     ]
   },
   {
@@ -266,7 +267,7 @@ const WorkEvents = [
       ]
     },
     accomplishments: [
-      'Managed the design and development of all web based projects.',
+      'Managed the design and development of all web-based projects.',
       'Played a lead role in the design, concept and production of print material',
       'Presented interactive content at client pitches.'
     ]
@@ -303,10 +304,11 @@ const WorkEvents = [
       ]
     },
     accomplishments: [
-      'Significantly improved the realationship between the creative and engineering department.',
-      'Developmed multiple tools to streamline the production of unorthadox development solutiohns.',
-      'Developed web applicationns for brands such as Jeep, Varisign, Geek Squad and many more.',
-      'Developed a library to simplify the usage of the AS2 drawing api.'
+      'Significantly improved the relationship between the creative and the engineering departments.',
+      'Developed multiple tools to streamline the production of unorthodox development solutions.',
+      'Developed web applications for brands such as Jeep, Verisign, Geek Squad and many more.',
+      'Developed a library to simplify the usage of the AS2 drawing API'
+
     ]
   },
   {
@@ -347,11 +349,12 @@ const WorkEvents = [
       ]
     },
     accomplishments: [
-      'Created a tool for 3D particle modeling for creating particle based user experieces elements.',
+      'Created a tool for 3D particle modeling for creating particle-based user experience elements.',
       'Mentored other engineers in the development of AS3 applications.',
-      'Searved as en expert in the transition from AS2 to AS3',
-      'Developed web applicationns for brands such as Biore, Hunter Douglass, Health Media and many more.',
+      'Served as an expert in the transition from AS2 to AS3',
+      'Developed web applications for brands such as Biore, Hunter Douglass, Health Media and many more.',
       'Developed a code library for AS3 rapid prototyping.'
+
     ]
   },
   {
@@ -403,9 +406,10 @@ const WorkEvents = [
     },
     accomplishments: [
       'Established a rapid prototyping workflow that streamlined proposal and production efficiency by more than 50 percent.',
-      'Developed a touch sceen interactive promotional tool for the company&#39;s booth at the 2010 Consemer Electronic Show.',
+      'Developed a touch screen interactive promotional tool for the company&#39;s booth at the 2010 Consumer Electronic Show.',
       'Rapidly output touch screen interface prototypes for testing and proof of concepts for brands such as Ford, Tesla and Chrysler.',
       'Redesigned the company&#39;s first mobile-responsive responsive website.'
+
     ]
   },
   {
@@ -473,13 +477,14 @@ const WorkEvents = [
       ]
     },
     accomplishments: [
-      'Created mobile, web and desktop applications using a wide veriety of technologies including Python, Vue js, Angular, electron, Three js, Pixi js, Unity, Objective C, Vuforia, Xamirine',
-      'Developed a wide range of tools for creative department, allowing for time saving efficiencies and increasing colaborition with developers.',
-      'Automated the process of creating custom html emails.',
-      'Created several reusable sripts to instantly mobile enable third party servey questions',
-      'Added multiple capabilities to the company&#39;s list of offerings including Augmented Reality, Virtual Reality, Rich Media Servey Skinning, and many more.',
-      'Contributed to the creation of the comany&#39;s prepritory survey platform.',
-      'Spearheaded a rapid prototyping initiative for the execution of potentional innovations.'
+      'Created mobile, web and desktop applications using a wide variety of technologies including Python, Vue js, Angular, electron, Three js, Pixi js, Unity, Objective C, Vuforia, Xamirine',
+      'Developed a wide range of tools for creative department, allowing for time saving efficiencies and increasing collaboration with developers.',
+      'Automated the process of creating custom HMTL emails.',
+      'Created several reusable scripts to instantly mobile enable third party survey questions',
+      'Added multiple capabilities to the company&#39;s list of offerings including Augmented Reality, Virtual Reality, Rich Media Survey Skinning, and many more.',
+      'Contributed to the creation of the company&#39;s preparatory survey platform.',
+      'Spearheaded a rapid prototyping initiative for the execution of protentional innovations.'
+
     ]
   }
 ]
