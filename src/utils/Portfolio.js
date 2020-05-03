@@ -34,6 +34,18 @@ const Portfolio = [
     preview: 'src/assets/images/ee.jpg',
     title: 'Employee Experience Journeymap',
     text: ''
+  },
+  {
+    link: 'http://dice.gongos.com',
+    preview: 'src/assets/images/dice.jpg',
+    title: 'Gongos DICE Assessment',
+    text: ''
+  },
+  {
+    link: 'https://millennialobserver.gongos.com/',
+    preview: 'src/assets/images/me.jpg',
+    title: 'Millennial Observer',
+    text: ''
   }
 ]
 export default Portfolio

@@ -17,7 +17,7 @@
         <label :for="tlID + '-contact-box'">Contact</label> <input type="checkbox" :id="tlID + '-contact-box'" style="display:none;" />
         <ul class="contact-list">
           <li class="phone-row">
-            <a tel="2482295491">&nbsp;Call Me</a>
+            <a href="https://www.linkedin.com/in/dan-koenig-b4a9808/" target="_blank">&nbsp;LinkedIn</a>
           </li>
           <li class="email-row">
             <a href="mailto:dpkoenig27@gmail.com">&nbsp;Email Me</a>
@@ -46,7 +46,7 @@
               <h2>{{work.details.company}}</h2>
               <p>{{work.details.title}}</p>
               <p>{{work.start.toString()}} - {{work.end > 0 ? work.end.toString() : 'Present'}}</p>
-              <dpk-carousel :items="work.details.charts" :contentwidth="120" :autoplay="true">
+              <dpk-carousel :items="work.details.charts" :contentwidth="120" :autoplay="false">
                 <div v-for="(chart, i) in work.details.charts" :key="'chart-' + i.toString()" :slot="'item-' + i.toString()">
                   <h3>
                     {{chart.title}}
@@ -718,14 +718,10 @@ ul.contact-list{
     }
   }
   > li.phone-row{
-    > a::before{
-      content: "\260F";
-    }
+    
   }
   > li.email-row{
-    > a::before{
-      content: "\2709";
-    }
+    
   }
 }
 
