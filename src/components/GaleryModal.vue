@@ -5,6 +5,7 @@
       <h3>
         {{title}}
       </h3>
+      <a v-on:click="closeGallery" class="pod-close-button"></a>
       <ul>
         <li v-for="(item, i) in items" :key="'items-' + i.toString()">
           <a :href="item.link" target="_blank">

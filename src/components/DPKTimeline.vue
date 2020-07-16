@@ -20,7 +20,7 @@
             <a href="https://www.linkedin.com/in/dan-koenig-b4a9808/" target="_blank">&nbsp;LinkedIn</a>
           </li>
           <li class="email-row">
-            <a href="mailto:dpkoenig27@gmail.com">&nbsp;Email Me</a>
+            <a href="mailto:dpkoenig27@yahoo.com">&nbsp;Email Me</a>
           </li>
         </ul>
       </li>
@@ -110,6 +110,9 @@
         </li>
         <li v-on:click="aboutSelected();shiftMenuButton();">
           About
+        </li>
+        <li>
+          <div><a v-on:click="portfolioSelected" href="#">Portfolio</a><a href="mailto:dpkoenig27@yahoo.com" target="_blank">Email</a><a href="https://www.linkedin.com/in/dan-koenig-b4a9808/" target="_blank">LinkedIn</a></div> 
         </li>
       </ul>
       <img :style="menuButtonDimensions.size.width >= 300 ? 'opacity: 0;' : 'opacity:1;'" src="src/assets/bars.svg" />
@@ -346,6 +349,11 @@ export default {
       self.$data.events.markers.push(n)
       n += 5
     }
+    if (document.location.href.split('?').length > 1) {
+      if (document.location.href.split('?')[1].split('show_portfolio=true')) {
+        self.portfolioSelected()
+      }
+    }
   }
 }
 </script>
@@ -416,22 +424,23 @@ ul.main-menu {
   z-index: 10;
   position:relative;
 }
+a.pod-close-button{
+  position:absolute;
+  display:inline-block;
+  top: 0px;
+  right: 6px;
+  font-size: 20px;
+  color: #ff0000;
+  z-index:800;
+}
+a.pod-close-button::after{
+  content: "\2716";
+  
+
+}
 .section-chart-bg{
   z-index: 260;
-  a.pod-close-button{
-    position:absolute;
-    display:inline-block;
-    top: 0px;
-    right: 6px;
-    font-size: 20px;
-    color: #ff0000;
-    z-index:800;
-  }
-  a.pod-close-button::after{
-    content: "\2716";
-    
-
-  }
+  
   img{
     padding-top: 20px;
     width: 100%;
@@ -680,6 +689,23 @@ div.menu-button-container{
       background-color:#ffffff;
       border-radius: 50px;
       opacity: 1;
+    }
+    > li:last-child{
+      font-size: 12px;
+      background-color: rgba(0,0,0,.6);
+      border-radius: 4px;
+      font-weight: normal;
+      > div{
+        display:flex;
+        flex-flow:row;
+        align-content: center;
+        justify-content: center;
+        -ms-flex-align: center;
+        > a{
+          padding: 4px;
+          color: #ffcc00;
+        }
+      }
     }
   }
 }
