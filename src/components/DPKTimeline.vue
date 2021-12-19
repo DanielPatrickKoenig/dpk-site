@@ -229,7 +229,7 @@ export default {
       this.sectionSelected({year: 1971, month: 0, day: 1}, {year: 2024, month: 0, day: 1}, 'about')
     },
     experienceSelected: function () {
-      this.sectionSelected({year: 1998, month: 0, day: 1}, {year: 2012, month: 0, day: 1}, 'experience')
+      this.sectionSelected({year: 1998, month: 0, day: 1}, {year: 2023, month: 0, day: 1}, 'experience')
     },
     educationSelected: function () {
       this.sectionSelected({year: 1993, month: 0, day: 1}, {year: 2000, month: 0, day: 1}, 'education')

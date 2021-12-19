@@ -416,8 +416,8 @@ const WorkEvents = [
     id: Utilities.generateID(),
     stateVal: 0,
     start: 2010,
-    end: -1,
-    month: 4,
+    end: 2020,
+    month: 9,
     details: {
       side: 'right',
       company: 'Gongos',
@@ -453,6 +453,8 @@ const WorkEvents = [
             'Vue': 100,
             'Vanilla js': 35,
             'jQuery': 25,
+            'Unity': 25,
+            'Blender': 20,
             'Vuetify': 45,
             'Pixi': 12,
             'three': 14,
@@ -484,6 +486,54 @@ const WorkEvents = [
       'Added multiple capabilities to the company&#39;s list of offerings including Augmented Reality, Virtual Reality, Rich Media Survey Skinning, and many more.',
       'Contributed to the creation of the company&#39;s preparatory survey platform.',
       'Spearheaded a rapid prototyping initiative for the execution of protentional innovations.'
+
+    ]
+  },
+  {
+    id: Utilities.generateID(),
+    stateVal: 0,
+    start: 2020,
+    end: -1,
+    month: 4,
+    details: {
+      side: 'left',
+      company: 'Merkle',
+      title: 'Sr. Interface Developer',
+      charts: [
+        {
+          type: Utilities.ChartTypes.PIE,
+          context: Utilities.ChartContexts.SKILLS,
+          title: 'Most Used Skils',
+          data: {
+            'JS': 55,
+            'SASS': 25,
+            'Perl': 2
+          }
+        },
+        {
+          type: Utilities.ChartTypes.WORDCLOUD,
+          context: Utilities.ChartContexts.FRAMEWORKS_LIBRARIES,
+          title: 'Frameworks and Libraries',
+          data: {
+            'Vue': 100,
+            'ex6': 80,
+            'Perl': 2,
+            'Texture Packer': 3,
+            'Vanilla JS': 20,
+            'Node': 10,
+            'Pixi': 20,
+            'Lottie': 15,
+            'SASS': 70,
+            'git': 55,
+            'npm': 65
+          }
+        }
+      ]
+    },
+    accomplishments: [
+      'Streamlined animation development with the development of testing and implementation tools.',
+      'Mentored developers in game development and programmatic animation.',
+      'Contributed to the development of brand loyalty promotions with expertise in es6, Sass and Vue.'
 
     ]
   }
